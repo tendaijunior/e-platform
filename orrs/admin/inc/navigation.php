@@ -65,6 +65,14 @@
                         </p>
                       </a>
                     </li>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url ?>admin/?page=scheduled" class="nav-link nav-reservations">
+                        <i class="nav-icon fas fa-ticket-alt"></i>
+                        <p>
+                          Calender
+                        </p>
+                      </a>
+                    </li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
                         <i class="nav-icon fas fa-users-cog"></i>
