@@ -176,7 +176,7 @@ if(isset($_GET['sid'])){
                 dataType: 'json',
 				error:err=>{
 					console.log(err)
-					alert_toast("An error occured",'error');
+					alert_toast("An error occured no!",'error');
 					end_loader();
 				},
                 success:function(resp){
