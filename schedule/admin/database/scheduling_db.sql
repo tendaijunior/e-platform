@@ -85,10 +85,10 @@ INSERT INTO `faculty` (`id`, `id_no`, `firstname`, `middlename`, `lastname`, `co
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedule_list_list`
+-- Table structure for table `vcourseschedule_list`
 --
 
-CREATE TABLE `schedule_list_list` (
+CREATE TABLE `vcourseschedule_list` (
   `id` int(30) NOT NULL,
   `faculty_id` int(30) NOT NULL,
   `title` varchar(200) NOT NULL,
@@ -104,10 +104,10 @@ CREATE TABLE `schedule_list_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `schedule_list_list`
+-- Dumping data for table `vcourseschedule_list`
 --
 
-INSERT INTO `schedule_list_list` (`id`, `faculty_id`, `title`, `schedule_type`, `description`, `location`, `is_repeating`, `repeating_data`, `schedule_date`, `time_from`, `time_to`, `date_created`) VALUES
+INSERT INTO `vcourseschedule_list` (`id`, `faculty_id`, `title`, `schedule_type`, `description`, `location`, `is_repeating`, `repeating_data`, `schedule_date`, `time_from`, `time_to`, `date_created`) VALUES
 (3, 2, 'Class 101 (M & Th)', 1, 'Sample Only', 'Online', 1, '{\"dow\":\"1,4\",\"start\":\"2020-10-01\",\"end\":\"2020-11-30\"}', '0000-00-00', '09:00:00', '12:00:00', '2020-10-20 15:51:01');
 
 -- --------------------------------------------------------
@@ -177,9 +177,9 @@ ALTER TABLE `faculty`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `schedule_list_list`
+-- Indexes for table `vcourseschedule_list`
 --
-ALTER TABLE `schedule_list_list`
+ALTER TABLE `vcourseschedule_list`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -217,9 +217,9 @@ ALTER TABLE `faculty`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `schedule_list_list`
+-- AUTO_INCREMENT for table `vcourseschedule_list`
 --
-ALTER TABLE `schedule_list_list`
+ALTER TABLE `vcourseschedule_list`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --

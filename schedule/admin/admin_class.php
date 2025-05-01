@@ -367,7 +367,7 @@ Class Action {
 		
 		extract($_POST);
 		$data = array();
-		$qry = $this->db->query("SELECT * FROM schedule_list");
+		$qry = $this->db->query("SELECT * FROM vcourseschedule");
 		while($row=$qry->fetch_assoc()){
 			if($row['is_repeating'] == 1){
 				$rdata = json_decode($row['repeating_data']);
