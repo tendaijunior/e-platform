@@ -4664,7 +4664,7 @@
         },
 
         /**
-         * schedules_list an update. It will run on the next UI update available.
+         * schedule_list an update. It will run on the next UI update available.
          * @method scheduleUpdate
          * @memberof Popper
          */

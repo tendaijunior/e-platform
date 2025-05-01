@@ -9,11 +9,11 @@ if(isset($_GET['id'])){
 
 ?>
 <div class="container-fluid">
-	<p>Schedule for: <b><?php echo ucwords($title) ?></b></p>
+	<p>Course Title: <b><?php echo ucwords($course_name) ?></b></p>
 	<p>Description: <b><?php echo $description ?></b></p>
-	<p>Location: </i> <b><?php echo $location ?></b></p>
-	<p>Time Start: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$time_from)) ?></b></p>
-	<p>Time End: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$time_to)) ?></b></p>
+	<p>Location: </i> <b><?php echo $venue ?></b></p>
+	<p>Time Start: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$schedule_date)) ?></b></p>
+	<p>Time End: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$schedule_date)) ?></b></p>
 	<hr class="divider">
 </div>
 <div class="modal-footer display">

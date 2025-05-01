@@ -1,7 +1,7 @@
 <?php include 'admin/db_connect.php' ?>
 <?php
 if(isset($_GET['id'])){
-	$qry = $conn->query("SELECT * FROM schedule_list where id=".$_GET['id'])->fetch_array();
+	$qry = $conn->query("SELECT * FROM vcourseschedule where id=".$_GET['id'])->fetch_array();
 	foreach($qry as $k =>$v){
 		$$k = $v;
 	}
@@ -9,9 +9,9 @@ if(isset($_GET['id'])){
 
 ?>
 <div class="container-fluid">
-	<p>Schedule for: <b><?php echo ucwords($code) ?></b></p>
-	<p>Description: <b><?php echo $region_location ?></b></p>
-	<p>Location: </i> <b><?php echo $region_location ?></b></p>
+	<p>Course: <b><?php echo ucwords($course_name) ?></b></p>
+	<p>Description: <b><?php echo $description ?></b></p>
+	<p>Location: </i> <b><?php echo $venue ?></b></p>
 	<p>Time Start: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$schedule_date)) ?></b></p>
 	<p>Time End: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$schedule_date)) ?></b></p>
 	<hr class="divider">
