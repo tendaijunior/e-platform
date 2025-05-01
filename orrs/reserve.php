@@ -1,10 +1,10 @@
 <?php
 if(isset($_GET['sid'])){
-    $trains = $conn->query("SELECT *,Concat(code,' - ',`name`) as course FROM `course_list` where id in (SELECT course_id FROM `schedule_list` where delete_flag = 0 and id='{$_GET['sid']}')");
+    $trains = $conn->query("SELECT *,Concat(code,' - ',`name`) as train FROM `train_list` where id in (SELECT train_id FROM `schedule_list` where delete_flag = 0 and id='{$_GET['sid']}')");
     $res = $trains->fetch_all(MYSQLI_ASSOC);
-    $train_fcf_arr = array_column($res,'premium_class_capacity','id');
-    $train_ef_arr = array_column($res,'standard_capacity','id');
-    $train_arr = array_column($res,'course','id');
+    $train_fcf_arr = array_column($res,'first_class_capacity','id');
+    $train_ef_arr = array_column($res,'economy_capacity','id');
+    $train_arr = array_column($res,'train','id');
     $qry = $conn->query("SELECT * from `schedule_list` where delete_flag = 0 and id='{$_GET['sid']}'");
     if($qry->num_rows > 0){
         $res = $qry->fetch_array();
@@ -33,13 +33,13 @@ if(isset($_GET['sid'])){
                             <dt class="text-muted">Schedule Code:</dt>
                             <dd class="pl-3"><b><?= isset($code) ? $code : 'N/A' ?></b></dd>
                             <dt class="text-muted">Schedule:</dt>
-                            <dd class="pl-3"><b><?= isset($schedule_date) && !is_null($schedule_date) ? date("M d, Y", strtotime($schedule_date)) : "Everday" ?> <?= isset($time_schedule) ? date("h:i A", strtotime($time_schedule)) : "--:-- --" ?></b></dd>
+                            <dd class="pl-3"><b><?= isset($date_schedule) && !is_null($date_schedule) ? date("M d, Y", strtotime($date_schedule)) : "Everday" ?> <?= isset($time_schedule) ? date("h:i A", strtotime($time_schedule)) : "--:-- --" ?></b></dd>
                         </dl>
                     </div>
                     <div class="col-md-4 col-sm-6">
                         <dl>
                             <dt class="text-muted">From:</dt>
-                            <dd class="pl-3"><b><?= isset($region_location) ? $region_location : "N/A" ?></b></dd>
+                            <dd class="pl-3"><b><?= isset($route_from) ? $route_from : "N/A" ?></b></dd>
                             <dt class="text-muted">To:</dt>
                             <dd class="pl-3"><b><?= isset($route_to) ? $route_to : "N/A" ?></b></dd>
                         </dl>
@@ -47,9 +47,9 @@ if(isset($_GET['sid'])){
                     <div class="col-md-4 col-sm-6">
                         <dl>
                             <dt class="text-muted">First Class Fare:</dt>
-                            <dd class="pl-3"><b><?= isset($premium_class_fare) ? $premium_class_fare : '--.--' ?></b></dd>
+                            <dd class="pl-3"><b><?= isset($first_class_fare) ? $first_class_fare : '--.--' ?></b></dd>
                             <dt class="text-muted">Economy Fare:</dt>
-                            <dd class="pl-3"><b><?= isset($standard_class_fare) ? $standard_class_fare : "--.--" ?></b></dd>
+                            <dd class="pl-3"><b><?= isset($economy_fare) ? $economy_fare : "--.--" ?></b></dd>
                         </dl>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ if(isset($_GET['sid'])){
             <form action="" id="reserve-form">
                 <input type="hidden" name="schedule_id" value=<?= isset($id) ? $id : "" ?>>
                 <input type="hidden" name="time" value=<?= isset($time_schedule) ? $time_schedule : "" ?>>
-                <div class="form-group col-md-4 col-sm-6 <?= isset($schedule_date) && !is_null($schedule_date) ? 'd-none' : '' ?>">
+                <div class="form-group col-md-4 col-sm-6 <?= isset($date_schedule) && !is_null($date_schedule) ? 'd-none' : '' ?>">
                     <label for="date" class="form-group">Schedule Date</label>
                     <input class="form-control form-control-sm rounded-0" type="date" name="date" id="date" required value="<?= isset($date_schedule) && !is_null($date_schedule) ? $date_schedule : '' ?>" min="<?= date("Y-m-d") ?>">
                 </div>
@@ -86,7 +86,7 @@ if(isset($_GET['sid'])){
                         <div class="row">
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-sm form-control-border" name="first_name[]" required>
+                                    <input type="text" class="form-control form-control-sm form-control-border" name="firstname[]" required>
                                     <small class="text-muted mx-2">First Name</small>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ if(isset($_GET['sid'])){
                             </div>
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-sm form-control-border" name="last_name[]" required>
+                                    <input type="text" class="form-control form-control-sm form-control-border" name="lastname[]" required>
                                     <small class="text-muted mx-2">Last Name</small>
                                 </div>
                             </div>
@@ -139,9 +139,9 @@ if(isset($_GET['sid'])){
        $('[name="seat_type"]').change(function(){
             var type = $(this).val()
             if(type == 1){
-                $('[name="fare_amount"]').val('<?= $premium_class_fare ?>')
+                $('[name="fare_amount"]').val('<?= $first_class_fare ?>')
             }else{
-                $('[name="fare_amount"]').val('<?= $standard_class_fare ?>')
+                $('[name="fare_amount"]').val('<?= $economy_fare ?>')
             }
        })
        $('.btn-remove').click(function(){
@@ -176,7 +176,7 @@ if(isset($_GET['sid'])){
                 dataType: 'json',
 				error:err=>{
 					console.log(err)
-					alert_toast("An error occured no!",'error');
+					alert_toast("An error occured",'error');
 					end_loader();
 				},
                 success:function(resp){

@@ -82,23 +82,23 @@ Class Master extends DBConnection {
 			}
 		}
 		if(empty($id)){
-			$sql = "INSERT INTO `course_list` set {$data} ";
+			$sql = "INSERT INTO `train_list` set {$data} ";
 		}else{
-			$sql = "UPDATE `course_list` set {$data} where id = '{$id}' ";
+			$sql = "UPDATE `train_list` set {$data} where id = '{$id}' ";
 		}
-		$check = $this->conn->query("SELECT * FROM `course_list` where `code` = '{$code}' and delete_flag = 0 ".($id > 0 ? " and id != '{$id}'" : ""));
+		$check = $this->conn->query("SELECT * FROM `train_list` where `code` = '{$code}' and delete_flag = 0 ".($id > 0 ? " and id != '{$id}'" : ""));
 		if($check->num_rows > 0){
 			$resp['status'] = 'failed';
-			$resp['msg'] = "Course # already exists.";
+			$resp['msg'] = "Train # already exists.";
 		}else{
 			$save = $this->conn->query($sql);
 			if($save){
 				$rid = !empty($id) ? $id : $this->conn->insert_id;
 				$resp['status'] = 'success';
 				if(empty($id))
-					$resp['msg'] = "Course has successfully added.";
+					$resp['msg'] = "Train has successfully added.";
 				else
-					$resp['msg'] = "Course details has been updated successfully.";
+					$resp['msg'] = "Train details has been updated successfully.";
 			}else{
 				$resp['status'] = 'failed';
 				$resp['msg'] = "An error occured.";
@@ -111,10 +111,10 @@ Class Master extends DBConnection {
 	}
 	function delete_train(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `course_list` set delete_flag = 1 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `train_list` set delete_flag = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success',"Course has been deleted successfully.");
+			$this->settings->set_flashdata('success',"Train has been deleted successfully.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
@@ -247,10 +247,10 @@ Class Master extends DBConnection {
 	function save_reservation(){
 		$_POST['schedule'] = $_POST['date'] ." ".$_POST['time'];
 		extract($_POST);
-		$capacity = $this->conn->query("SELECT `".($seat_type == 1 ? "premium_class_capacity" : "standard_capacity")."` FROM course_list where id in (SELECT course_id FROM `schedule_list` where id ='{$schedule_id}') ")->fetch_array()[0];
+		$capacity = $this->conn->query("SELECT `".($seat_type == 1 ? "first_class_capacity" : "economy_capacity")."` FROM train_list where id in (SELECT train_id FROM `schedule_list` where id ='{$schedule_id}') ")->fetch_array()[0];
 		$reserve = $this->conn->query("SELECT * FROM `reservation_list` where schedule_id = '{$schedule_id}' and schedule='{$schedule}' and seat_type='$seat_type'")->num_rows;
 		$slot = $capacity - $reserve;
-		if(count($first_name) > $slot){
+		if(count($firstname) > $slot){
 			$resp['status'] = "failed";
 			$resp['msg'] = "This schedule has only [{$slot}] left for the selected seat type/group";
 			return json_encode($resp);
@@ -259,7 +259,7 @@ Class Master extends DBConnection {
 		$sn = [];
 		$prefix = $seat_type == 1 ? "FC-" : "E-";
 		$seat = sprintf("%'.03d",1);
-		foreach($first_name as $k=>$v){
+		foreach($firstname as $k=>$v){
 			while(true){
 				$check = $this->conn->query("SELECT * FROM `reservation_list` where schedule_id = '{$schedule_id}' and schedule='{$schedule}' and seat_num = '{$prefix}{$seat}' and seat_type='$seat_type'")->num_rows;
 				if($check > 0){
@@ -272,10 +272,10 @@ Class Master extends DBConnection {
 			$seat = sprintf("%'.03d",ceil($seat) + 1);
 			$sn[] = $seat_num;
 			if(!empty($data)) $data .= ", ";
-			$data .= "('{$seat_num}','{$schedule_id}','{$schedule}','{$v}','{$middlename[$k]}','{$last_name[$k]}','{$seat_type}','{$fare_amount}')";
+			$data .= "('{$seat_num}','{$schedule_id}','{$schedule}','{$v}','{$middlename[$k]}','{$lastname[$k]}','{$seat_type}','{$fare_amount}')";
 		}
 		if(!empty($data)){
-			$sql = "INSERT INTO `reservation_list` (`seat_num`,`schedule_id`,`schedule`,`first_name`,`middlename`,`last_name`,`seat_type`,`fare_amount`) VALUES {$data}";
+			$sql = "INSERT INTO `reservation_list` (`seat_num`,`schedule_id`,`schedule`,`firstname`,`middlename`,`lastname`,`seat_type`,`fare_amount`) VALUES {$data}";
 			$save_all = $this->conn->query($sql);
 			if($save_all){
 				$resp['status'] = 'success';

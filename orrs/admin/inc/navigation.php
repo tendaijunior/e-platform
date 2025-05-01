@@ -51,9 +51,9 @@
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=trains" class="nav-link nav-trains">
-                        <i class="nav-icon fas fa-course"></i>
+                        <i class="nav-icon fas fa-train"></i>
                         <p>
-                          Course List
+                          Train List
                         </p>
                       </a>
                     </li>
@@ -62,14 +62,6 @@
                         <i class="nav-icon fas fa-calendar-day"></i>
                         <p>
                           Schedule List
-                        </p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?php echo base_url ?>admin/?page=scheduled" class="nav-link nav-reservations">
-                        <i class="nav-icon fas fa-ticket-alt"></i>
-                        <p>
-                          Calender
                         </p>
                       </a>
                     </li>

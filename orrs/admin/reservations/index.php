@@ -16,11 +16,11 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th>Seat Number</th>
-						<th>Date</th>
+						<th>Seat #</th>
+						<th>Schedule</th>
 						<th>Schedule Code</th>
-						<th>Student</th>
-						<th>Class</th>
+						<th>Passenger</th>
+						<th>Group</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -34,15 +34,15 @@
 							<td><?= $row['seat_num'] ?></td>
 							<td class=""><?php echo date("Y-m-d H:i",strtotime($row['schedule'])) ?></td>
 							<td><?php echo ($row['sched_code']) ?></td>
-							<td class=""><p class="truncate-1"><?php echo ucwords($row['last_name'].', '.$row['first_name'].' '.$row['middlename']) ?></p></td>
+							<td class=""><p class="truncate-1"><?php echo ucwords($row['lastname'].', '.$row['firstname'].' '.$row['middlename']) ?></p></td>
 							<td class="text-center">
 								<?php 
 									switch ($row['seat_type']){
 										case 1:
-											echo '<span class="rounded-pill badge badge-warning col-6">Premium</span>';
+											echo '<span class="rounded-pill badge badge-warning col-6">First Class</span>';
 											break;
 										case 2:
-											echo '<span class="rounded-pill badge badge-success col-6">Standard</span>';
+											echo '<span class="rounded-pill badge badge-success col-6">Economy</span>';
 											break;
 									}
 								?>

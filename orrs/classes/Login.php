@@ -17,7 +17,7 @@ class Login extends DBConnection {
 	}
 	public function login(){
 		extract($_POST);
-		$stmt = $this->conn->prepare("SELECT * FROM booking_system_users where username = ? and password = ? ");
+		$stmt = $this->conn->prepare("SELECT * from users where username = ? and password = ? ");
 		$pw = md5($password);
 		$stmt->bind_param('ss',$username,$pw);
 		$stmt->execute();
@@ -45,7 +45,7 @@ class Login extends DBConnection {
 	}
 	function client_login(){
 		extract($_POST);
-		$stmt = $this->conn->prepare("SELECT *,concat(last_name,', ',first_name,' ',middlename) as fullname from client_list where email = ? and `password` = ? ");
+		$stmt = $this->conn->prepare("SELECT *,concat(lastname,', ',firstname,' ',middlename) as fullname from client_list where email = ? and `password` = ? ");
 		$pw = md5($password);
 		$stmt->bind_param('ss',$email,$pw);
 		$stmt->execute();

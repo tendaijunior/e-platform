@@ -1,7 +1,7 @@
 
 <?php 
 if(isset($_GET['id']) && $_GET['id'] > 0){
-    $user = $conn->query("SELECT * FROM booking_system_users where id ='{$_GET['id']}'");
+    $user = $conn->query("SELECT * FROM users where id ='{$_GET['id']}'");
     foreach($user->fetch_array() as $k =>$v){
         $meta[$k] = $v;
     }
@@ -20,11 +20,11 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 				<input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
 				<div class="form-group col-6">
 					<label for="name">First Name</label>
-					<input type="text" name="first_name" id="first_name" class="form-control" value="<?php echo isset($meta['first_name']) ? $meta['first_name']: '' ?>" required>
+					<input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo isset($meta['firstname']) ? $meta['firstname']: '' ?>" required>
 				</div>
 				<div class="form-group col-6">
 					<label for="name">Last Name</label>
-					<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo isset($meta['last_name']) ? $meta['last_name']: '' ?>" required>
+					<input type="text" name="lastname" id="lastname" class="form-control" value="<?php echo isset($meta['lastname']) ? $meta['lastname']: '' ?>" required>
 				</div>
 				<div class="form-group col-6">
 					<label for="username">Username</label>

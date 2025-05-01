@@ -1,12 +1,12 @@
 <?php
 require_once('../../config.php');
 if(isset($_GET['id'])){
-    $trains = $conn->query("SELECT *,Concat(code,' - ',`name`) as course FROM `course_list` where id in (SELECT course_id FROM `schedule_list` where delete_flag = 0 and id in (SELECT schedule_id FROM `reservation_list` where id in ({$_GET['id']}) ) )");
+    $trains = $conn->query("SELECT *,Concat(code,' - ',`name`) as train FROM `train_list` where id in (SELECT train_id FROM `schedule_list` where delete_flag = 0 and id in (SELECT schedule_id FROM `reservation_list` where id in ({$_GET['id']}) ) )");
     $res = $trains->fetch_all(MYSQLI_ASSOC);
-    $train_fcf_arr = array_column($res,'premium_class_capacity','id');
-    $train_ef_arr = array_column($res,'standard_capacity','id');
-    $train_arr = array_column($res,'course','id');
-    $qry = $conn->query("SELECT r.*,s.code as sched_code,s.course_id from `reservation_list` r inner join `schedule_list` s on r.schedule_id = s.id where r.id in ({$_GET['id']}) ");
+    $train_fcf_arr = array_column($res,'first_class_capacity','id');
+    $train_ef_arr = array_column($res,'economy_capacity','id');
+    $train_arr = array_column($res,'train','id');
+    $qry = $conn->query("SELECT r.*,s.code as sched_code,s.train_id from `reservation_list` r inner join `schedule_list` s on r.schedule_id = s.id where r.id in ({$_GET['id']}) ");
     if($qry->num_rows > 0){
         $res = $qry->fetch_all(MYSQLI_ASSOC);
     }else{
@@ -65,8 +65,8 @@ $train_group = ['','First Class','Economy'];
             <div class="row">
                 <div class="col-auto pr-2"><b>Schedule Code:</b></div>
                 <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= $row['sched_code'] ?></b></div>
-                <div class="col-auto pl-4 pr-2"><b>Course:</b></div>
-                <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= isset($train_arr[$row['course_id']]) ? $train_arr[$row['course_id']] : "N/A" ?></b></div>
+                <div class="col-auto pl-4 pr-2"><b>Train:</b></div>
+                <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= isset($train_arr[$row['train_id']]) ? $train_arr[$row['train_id']] : "N/A" ?></b></div>
             </div>
             <div class="row">
                 <div class="col-auto pr-2"><b>Schedule:</b></div>
@@ -78,12 +78,12 @@ $train_group = ['','First Class','Economy'];
             </div>
             <div class="row">
                 <div class="col-auto pr-2"><b>Passenger Name:</b></div>
-                <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= strtoupper($row['last_name'].', '.$row['first_name'].' '.$row['middlename']) ?></b></div>
+                <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= strtoupper($row['lastname'].', '.$row['firstname'].' '.$row['middlename']) ?></b></div>
             </div>
             <div class="clear-fix my-5"></div>
             <div class="d-flex justify-content-end" id="assignatory">
                 <div class="col-md-4">
-                    <div class="border-bottom text-center border-dark"><?= $_settings->userdata('fistname').' '.$_settings->userdata('middlename').' '.$_settings->userdata('last_name') ?></div>
+                    <div class="border-bottom text-center border-dark"><?= $_settings->userdata('fistname').' '.$_settings->userdata('middlename').' '.$_settings->userdata('lastname') ?></div>
                     <div class="text-center">Printed By</div>
                     <div class="text-center"><?= date("Y-m-d H:i") ?></div>
                 </div>

@@ -17,7 +17,7 @@
           position: fixed !important;
           top: 0 !important;
           z-index: 1037;
-          padding: 30px;
+          padding: 0.3em 2.5em !important;
         }
         #top-Nav{
           top: 2.3em;
@@ -27,7 +27,7 @@
           padding-top: calc(3.2em) !important
       }
       </style>
-      <nav class="w-100 px-2 py-1 position-fixed top-0 bg-black text-light" id="login-nav">
+      <nav class="w-100 px-2 py-1 position-fixed top-0 bg-dark text-light" id="login-nav">
         <div class="d-flex justify-content-between w-100">
           <div>
             <span class="mr-2"><i class="fa fa-phone mr-1"></i> <?= $_settings->info('contact') ?></span>
@@ -35,7 +35,7 @@
           <div>
             <?php if($_settings->userdata('id') > 0): ?>
               <span class="mx-2"><img src="<?= validate_image($_settings->userdata('avatar')) ?>" alt="User Avatar" id="student-img-avatar"></span>
-              <span class="mx-2">Good Day, <?= !empty($_settings->userdata('username')) ? $_settings->userdata('username') : $_settings->userdata('email') ?></span>
+              <span class="mx-2">Howdy, <?= !empty($_settings->userdata('username')) ? $_settings->userdata('username') : $_settings->userdata('email') ?></span>
             <?php if($_settings->userdata('login_type') == 1): ?>
               <span class="mx-1"><a href="<?= base_url.'classes/Login.php?f=logout' ?>"><i class="fa fa-power-off"></i></a></span>
             <?php else: ?>
@@ -47,7 +47,7 @@
           </div>
         </div>
       </nav>
-      <nav class="main-header navbar navbar-expand navbar-black border-0 text-sm bg-black" id='top-Nav'>
+      <nav class="main-header navbar navbar-expand navbar-light border-0 text-sm bg-gradient-light" id='top-Nav'>
         
         <div class="container">
           <a href="./" class="navbar-brand">
@@ -68,11 +68,6 @@
               <li class="nav-item">
                 <a href="./?page=schedules" class="nav-link <?= isset($page) && $page =='schedules' ? "active" : "" ?>">Schedules</a>
               </li>
-
-              <li class="nav-item">
-                <a href="calender.php" class="nav-link <?= isset($page) && $page =='schedules' ? "active" : "" ?>">Calender</a>
-              </li>
-
               <li class="nav-item">
                 <a href="./?page=about" class="nav-link <?= isset($page) && $page =='about' ? "active" : "" ?>">About Us</a>
               </li>

@@ -45,13 +45,13 @@ if(isset($_GET['id'])){
             </div>
         </fielset>
         <div class="form-group">
-            <label for="course_id" class="control-label">Course</label>
-            <select name="course_id" id="course_id" class="form-control form-control-border select2" >
+            <label for="train_id" class="control-label">Train</label>
+            <select name="train_id" id="train_id" class="form-control form-control-border select2" >
                 <?php 
-                $trains = $conn->query("SELECT * FROM course_list where delete_flag = 0 ".(isset($course_id) && !empty($course_id) ? " or id = '{$course_id}' " : "")." order by name asc");
+                $trains = $conn->query("SELECT * FROM train_list where delete_flag = 0 ".(isset($train_id) && !empty($train_id) ? " or id = '{$train_id}' " : "")." order by name asc");
                 while($row = $trains->fetch_assoc()):
                 ?>
-                <option value="<?= $row['id'] ?>" <?= isset($course_id) && $course_id == $row['id'] ? "selected" : "" ?> <?= $row['delete_flag'] == 1 ? "disabled" : "" ?>><?= ($row['code']. " - ". $row['name']) ?></option>
+                <option value="<?= $row['id'] ?>" <?= isset($train_id) && $train_id == $row['id'] ? "selected" : "" ?> <?= $row['delete_flag'] == 1 ? "disabled" : "" ?>><?= ($row['code']. " - ". $row['name']) ?></option>
                 <?php endwhile; ?>
             </select>
         </div>
@@ -59,8 +59,8 @@ if(isset($_GET['id'])){
             <legend class="text-muted">Route</legend>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="region_location" class="control-label">From</label>
-                    <input type="text" name="region_location" id="region_location" class="form-control form-control-sm form-control-border" required value="<?= isset($region_location) ? $region_location : "" ?>"/>
+                    <label for="route_from" class="control-label">From</label>
+                    <input type="text" name="route_from" id="route_from" class="form-control form-control-sm form-control-border" required value="<?= isset($route_from) ? $route_from : "" ?>"/>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="route_to" class="control-label">To</label>
@@ -72,12 +72,12 @@ if(isset($_GET['id'])){
             <legend class="text-muted">Fare</legend>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="premium_class_fare" class="control-label">Premium Class</label>
-                    <input type="number" name="premium_class_fare" id="premium_class_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($premium_class_fare) ? $premium_class_fare : "" ?>"/>
+                    <label for="first_class_fare" class="control-label">First Class</label>
+                    <input type="number" name="first_class_fare" id="first_class_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($first_class_fare) ? $first_class_fare : "" ?>"/>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="standard_class_fare" class="control-label">Standard Class</label>
-                    <input type="number" name="standard_class_fare" id="standard_class_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($standard_class_fare) ? $standard_class_fare : "" ?>"/>
+                    <label for="economy_fare" class="control-label">Economy</label>
+                    <input type="number" name="economy_fare" id="economy_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($economy_fare) ? $economy_fare : "" ?>"/>
                 </div>
             </div>
         </fielset>
@@ -95,8 +95,8 @@ if(isset($_GET['id'])){
             }
         })
         $('#uni_modal').on('shown.bs.modal',function(){
-            $('#course_id').select2({
-                placeholder:"Please Select Course here.",
+            $('#train_id').select2({
+                placeholder:"Please Select Train here.",
                 width:'100%',
                 dropdownParent:$('#uni_modal')
             })

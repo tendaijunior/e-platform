@@ -46,7 +46,7 @@
 				<tbody>
 					<?php 
 						$i = 1;
-						$qry = $conn->query("SELECT *,concat(first_name,' ',last_name) as name from `booking_system_users` where id != '1' order by concat(first_name,' ',last_name) asc ");
+						$qry = $conn->query("SELECT *,concat(firstname,' ',lastname) as name from `users` where id != '1' order by concat(firstname,' ',lastname) asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>

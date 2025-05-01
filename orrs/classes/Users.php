@@ -1,6 +1,6 @@
 <?php
 require_once('../config.php');
-Class booking_system_users extends DBConnection {
+Class Users extends DBConnection {
 	private $settings;
 	public function __construct(){
 		global $_settings;
@@ -22,13 +22,13 @@ Class booking_system_users extends DBConnection {
 				return 4;
 			}
 		}
-		$chk = $this->conn->query("SELECT * FROM `booking_system_users` where username ='{$username}' ".($id>0? " and id!= '{$id}' " : ""))->num_rows;
+		$chk = $this->conn->query("SELECT * FROM `users` where username ='{$username}' ".($id>0? " and id!= '{$id}' " : ""))->num_rows;
 		if($chk > 0){
 			return 3;
 			exit;
 		}
 		foreach($_POST as $k => $v){
-			if(in_array($k,array('first_name','middlename','last_name','username','type'))){
+			if(in_array($k,array('firstname','middlename','lastname','username','type'))){
 				if(!empty($data)) $data .=" , ";
 				$data .= " {$k} = '{$v}' ";
 			}
@@ -40,7 +40,7 @@ Class booking_system_users extends DBConnection {
 		}
 
 		if(empty($id)){
-			$qry = $this->conn->query("INSERT INTO booking_system_users set {$data}");
+			$qry = $this->conn->query("INSERT INTO users set {$data}");
 			if($qry){
 				$id = $this->conn->insert_id;
 				$this->settings->set_flashdata('success','User Details successfully saved.');
@@ -50,7 +50,7 @@ Class booking_system_users extends DBConnection {
 			}
 
 		}else{
-			$qry = $this->conn->query("UPDATE booking_system_users set $data where id = {$id}");
+			$qry = $this->conn->query("UPDATE users set $data where id = {$id}");
 			if($qry){
 				$this->settings->set_flashdata('success','User Details successfully updated.');
 				if($id == $this->settings->userdata('id')){
@@ -98,7 +98,7 @@ Class booking_system_users extends DBConnection {
 				}
 			}
 			if(isset($uploaded_img)){
-				$this->conn->query("UPDATE booking_system_users set `avatar` = CONCAT('{$fname}','?v=',unix_timestamp(CURRENT_TIMESTAMP)) where id = '{$id}' ");
+				$this->conn->query("UPDATE users set `avatar` = CONCAT('{$fname}','?v=',unix_timestamp(CURRENT_TIMESTAMP)) where id = '{$id}' ");
 				if($id == $this->settings->userdata('id')){
 						$this->settings->set_userdata('avatar',$fname);
 				}
@@ -110,8 +110,8 @@ Class booking_system_users extends DBConnection {
 	}
 	public function delete_users(){
 		extract($_POST);
-		$avatar = $this->conn->query("SELECT avatar FROM booking_system_users where id = '{$id}'")->fetch_array()['avatar'];
-		$qry = $this->conn->query("DELETE FROM booking_system_users where id = $id");
+		$avatar = $this->conn->query("SELECT avatar FROM users where id = '{$id}'")->fetch_array()['avatar'];
+		$qry = $this->conn->query("DELETE FROM users where id = $id");
 		if($qry){
 			$avatar = explode("?",$avatar)[0];
 			$this->settings->set_flashdata('success','User Details successfully deleted.');
@@ -248,23 +248,23 @@ Class booking_system_users extends DBConnection {
 	
 }
 
-$booking_system_users = new booking_system_users();
+$users = new users();
 $action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
 switch ($action) {
 	case 'save':
-		echo $booking_system_users->save_users();
+		echo $users->save_users();
 	break;
 	case 'delete':
-		echo $booking_system_users->delete_users();
+		echo $users->delete_users();
 	break;
 	case 'save_client':
-		echo $booking_system_users->save_client();
+		echo $users->save_client();
 	break;
 	case 'delete_client':
-		echo $booking_system_users->delete_client();
+		echo $users->delete_client();
 	break;
 	case 'verify_client':
-		echo $booking_system_users->verify_client();
+		echo $users->verify_client();
 	break;
 	default:
 		// echo $sysset->index();
