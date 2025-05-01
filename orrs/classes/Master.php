@@ -82,23 +82,23 @@ Class Master extends DBConnection {
 			}
 		}
 		if(empty($id)){
-			$sql = "INSERT INTO `train_list` set {$data} ";
+			$sql = "INSERT INTO `course_list` set {$data} ";
 		}else{
-			$sql = "UPDATE `train_list` set {$data} where id = '{$id}' ";
+			$sql = "UPDATE `course_list` set {$data} where id = '{$id}' ";
 		}
-		$check = $this->conn->query("SELECT * FROM `train_list` where `code` = '{$code}' and delete_flag = 0 ".($id > 0 ? " and id != '{$id}'" : ""));
+		$check = $this->conn->query("SELECT * FROM `course_list` where `code` = '{$code}' and delete_flag = 0 ".($id > 0 ? " and id != '{$id}'" : ""));
 		if($check->num_rows > 0){
 			$resp['status'] = 'failed';
-			$resp['msg'] = "Train # already exists.";
+			$resp['msg'] = "Course # already exists.";
 		}else{
 			$save = $this->conn->query($sql);
 			if($save){
 				$rid = !empty($id) ? $id : $this->conn->insert_id;
 				$resp['status'] = 'success';
 				if(empty($id))
-					$resp['msg'] = "Train has successfully added.";
+					$resp['msg'] = "Course has successfully added.";
 				else
-					$resp['msg'] = "Train details has been updated successfully.";
+					$resp['msg'] = "Course details has been updated successfully.";
 			}else{
 				$resp['status'] = 'failed';
 				$resp['msg'] = "An error occured.";
@@ -111,10 +111,10 @@ Class Master extends DBConnection {
 	}
 	function delete_train(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `train_list` set delete_flag = 1 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `course_list` set delete_flag = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success',"Train has been deleted successfully.");
+			$this->settings->set_flashdata('success',"Course has been deleted successfully.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
@@ -247,7 +247,7 @@ Class Master extends DBConnection {
 	function save_reservation(){
 		$_POST['schedule'] = $_POST['date'] ." ".$_POST['time'];
 		extract($_POST);
-		$capacity = $this->conn->query("SELECT `".($seat_type == 1 ? "first_class_capacity" : "economy_capacity")."` FROM train_list where id in (SELECT train_id FROM `schedule_list` where id ='{$schedule_id}') ")->fetch_array()[0];
+		$capacity = $this->conn->query("SELECT `".($seat_type == 1 ? "premium_class_capacity" : "standard_capacity")."` FROM course_list where id in (SELECT course_id FROM `schedule_list` where id ='{$schedule_id}') ")->fetch_array()[0];
 		$reserve = $this->conn->query("SELECT * FROM `reservation_list` where schedule_id = '{$schedule_id}' and schedule='{$schedule}' and seat_type='$seat_type'")->num_rows;
 		$slot = $capacity - $reserve;
 		if(count($first_name) > $slot){

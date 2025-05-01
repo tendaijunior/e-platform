@@ -87,14 +87,14 @@ INSERT INTO `reservation_list` (`id`, `seat_num`, `schedule_id`, `schedule`, `fi
 CREATE TABLE `schedule_list` (
   `id` int(30) NOT NULL,
   `code` varchar(100) NOT NULL,
-  `train_id` int(30) NOT NULL,
-  `route_from` text NOT NULL,
+  `course_id` int(30) NOT NULL,
+  `region_location` text NOT NULL,
   `route_to` text NOT NULL,
   `type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1 = daily, 2= One-Time Schedule',
   `date_schedule` date DEFAULT NULL,
   `time_schedule` time NOT NULL,
-  `first_class_fare` float NOT NULL DEFAULT 0,
-  `economy_fare` float NOT NULL DEFAULT 0,
+  `premium_class_fare` float NOT NULL DEFAULT 0,
+  `standard_class_fare` float NOT NULL DEFAULT 0,
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
@@ -104,7 +104,7 @@ CREATE TABLE `schedule_list` (
 -- Dumping data for table `schedule_list`
 --
 
-INSERT INTO `schedule_list` (`id`, `code`, `train_id`, `route_from`, `route_to`, `type`, `date_schedule`, `time_schedule`, `first_class_fare`, `economy_fare`, `delete_flag`, `date_created`, `date_updated`) VALUES
+INSERT INTO `schedule_list` (`id`, `code`, `course_id`, `region_location`, `route_to`, `type`, `date_schedule`, `time_schedule`, `premium_class_fare`, `standard_class_fare`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (1, '202201-0001', 1, 'Station 1', 'Station 2', 1, NULL, '07:00:00', 50, 25, 0, '2022-01-05 13:14:45', '2022-01-05 13:23:17'),
 (2, '202201-0003', 2, 'Station 2', 'Station 5', 2, '2022-01-07', '08:00:00', 250, 170, 0, '2022-01-05 13:17:49', '2022-01-05 13:25:18'),
 (3, '202201-0002', 1, 'Station 1', 'Station 3', 1, NULL, '08:30:00', 100, 75, 0, '2022-01-05 13:18:25', '2022-01-05 13:24:28'),
@@ -142,30 +142,30 @@ INSERT INTO `system_info` (`id`, `meta_field`, `meta_value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `train_list`
+-- Table structure for table `course_list`
 --
 
-CREATE TABLE `train_list` (
+CREATE TABLE `course_list` (
   `id` int(30) NOT NULL,
   `code` varchar(100) NOT NULL,
   `name` text NOT NULL,
-  `first_class_capacity` float NOT NULL DEFAULT 0,
-  `economy_capacity` float NOT NULL DEFAULT 0,
+  `premium_class_capacity` float NOT NULL DEFAULT 0,
+  `standard_capacity` float NOT NULL DEFAULT 0,
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `train_list`
+-- Dumping data for table `course_list`
 --
 
-INSERT INTO `train_list` (`id`, `code`, `name`, `first_class_capacity`, `economy_capacity`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 'SEI-1001', 'Train 101', 100, 200, 0, '2022-01-05 11:05:42', '2022-01-05 16:27:47'),
-(2, 'SEI-1002', 'Train 102', 100, 200, 0, '2022-01-05 11:11:41', NULL),
-(3, 'SEI-1003', 'Train 103', 150, 300, 0, '2022-01-05 11:11:56', NULL),
-(4, 'SEI-1004', 'Train 104', 150, 300, 0, '2022-01-05 11:12:15', NULL),
-(5, 'SEI-1005', 'Train 105', 800, 1500, 1, '2022-01-05 11:13:00', '2022-01-05 11:13:14');
+INSERT INTO `course_list` (`id`, `code`, `name`, `premium_class_capacity`, `standard_capacity`, `delete_flag`, `date_created`, `date_updated`) VALUES
+(1, 'SEI-1001', 'Course 101', 100, 200, 0, '2022-01-05 11:05:42', '2022-01-05 16:27:47'),
+(2, 'SEI-1002', 'Course 102', 100, 200, 0, '2022-01-05 11:11:41', NULL),
+(3, 'SEI-1003', 'Course 103', 150, 300, 0, '2022-01-05 11:11:56', NULL),
+(4, 'SEI-1004', 'Course 104', 150, 300, 0, '2022-01-05 11:12:15', NULL),
+(5, 'SEI-1005', 'Course 105', 800, 1500, 1, '2022-01-05 11:13:00', '2022-01-05 11:13:14');
 
 -- --------------------------------------------------------
 
@@ -218,7 +218,7 @@ ALTER TABLE `reservation_list`
 --
 ALTER TABLE `schedule_list`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `train_id` (`train_id`);
+  ADD KEY `course_id` (`course_id`);
 
 --
 -- Indexes for table `system_info`
@@ -227,9 +227,9 @@ ALTER TABLE `system_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `train_list`
+-- Indexes for table `course_list`
 --
-ALTER TABLE `train_list`
+ALTER TABLE `course_list`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -267,9 +267,9 @@ ALTER TABLE `system_info`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `train_list`
+-- AUTO_INCREMENT for table `course_list`
 --
-ALTER TABLE `train_list`
+ALTER TABLE `course_list`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
@@ -292,7 +292,7 @@ ALTER TABLE `reservation_list`
 -- Constraints for table `schedule_list`
 --
 ALTER TABLE `schedule_list`
-  ADD CONSTRAINT `schedule_list_ibfk_1` FOREIGN KEY (`train_id`) REFERENCES `train_list` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `schedule_list_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course_list` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

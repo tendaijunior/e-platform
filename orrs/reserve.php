@@ -1,10 +1,10 @@
 <?php
 if(isset($_GET['sid'])){
-    $trains = $conn->query("SELECT *,Concat(code,' - ',`name`) as train FROM `train_list` where id in (SELECT train_id FROM `schedule_list` where delete_flag = 0 and id='{$_GET['sid']}')");
+    $trains = $conn->query("SELECT *,Concat(code,' - ',`name`) as course FROM `course_list` where id in (SELECT course_id FROM `schedule_list` where delete_flag = 0 and id='{$_GET['sid']}')");
     $res = $trains->fetch_all(MYSQLI_ASSOC);
-    $train_fcf_arr = array_column($res,'first_class_capacity','id');
-    $train_ef_arr = array_column($res,'economy_capacity','id');
-    $train_arr = array_column($res,'train','id');
+    $train_fcf_arr = array_column($res,'premium_class_capacity','id');
+    $train_ef_arr = array_column($res,'standard_capacity','id');
+    $train_arr = array_column($res,'course','id');
     $qry = $conn->query("SELECT * from `schedule_list` where delete_flag = 0 and id='{$_GET['sid']}'");
     if($qry->num_rows > 0){
         $res = $qry->fetch_array();
@@ -39,7 +39,7 @@ if(isset($_GET['sid'])){
                     <div class="col-md-4 col-sm-6">
                         <dl>
                             <dt class="text-muted">From:</dt>
-                            <dd class="pl-3"><b><?= isset($route_from) ? $route_from : "N/A" ?></b></dd>
+                            <dd class="pl-3"><b><?= isset($region_location) ? $region_location : "N/A" ?></b></dd>
                             <dt class="text-muted">To:</dt>
                             <dd class="pl-3"><b><?= isset($route_to) ? $route_to : "N/A" ?></b></dd>
                         </dl>
@@ -47,9 +47,9 @@ if(isset($_GET['sid'])){
                     <div class="col-md-4 col-sm-6">
                         <dl>
                             <dt class="text-muted">First Class Fare:</dt>
-                            <dd class="pl-3"><b><?= isset($first_class_fare) ? $first_class_fare : '--.--' ?></b></dd>
+                            <dd class="pl-3"><b><?= isset($premium_class_fare) ? $premium_class_fare : '--.--' ?></b></dd>
                             <dt class="text-muted">Economy Fare:</dt>
-                            <dd class="pl-3"><b><?= isset($economy_fare) ? $economy_fare : "--.--" ?></b></dd>
+                            <dd class="pl-3"><b><?= isset($standard_class_fare) ? $standard_class_fare : "--.--" ?></b></dd>
                         </dl>
                     </div>
                 </div>
@@ -139,9 +139,9 @@ if(isset($_GET['sid'])){
        $('[name="seat_type"]').change(function(){
             var type = $(this).val()
             if(type == 1){
-                $('[name="fare_amount"]').val('<?= $first_class_fare ?>')
+                $('[name="fare_amount"]').val('<?= $premium_class_fare ?>')
             }else{
-                $('[name="fare_amount"]').val('<?= $economy_fare ?>')
+                $('[name="fare_amount"]').val('<?= $standard_class_fare ?>')
             }
        })
        $('.btn-remove').click(function(){

@@ -35,7 +35,7 @@
           <div>
             <?php if($_settings->userdata('id') > 0): ?>
               <span class="mx-2"><img src="<?= validate_image($_settings->userdata('avatar')) ?>" alt="User Avatar" id="student-img-avatar"></span>
-              <span class="mx-2">Howdy, <?= !empty($_settings->userdata('username')) ? $_settings->userdata('username') : $_settings->userdata('email') ?></span>
+              <span class="mx-2">Good Day, <?= !empty($_settings->userdata('username')) ? $_settings->userdata('username') : $_settings->userdata('email') ?></span>
             <?php if($_settings->userdata('login_type') == 1): ?>
               <span class="mx-1"><a href="<?= base_url.'classes/Login.php?f=logout' ?>"><i class="fa fa-power-off"></i></a></span>
             <?php else: ?>
@@ -68,6 +68,11 @@
               <li class="nav-item">
                 <a href="./?page=schedules" class="nav-link <?= isset($page) && $page =='schedules' ? "active" : "" ?>">Schedules</a>
               </li>
+
+              <li class="nav-item">
+                <a href="calender.php" class="nav-link <?= isset($page) && $page =='schedules' ? "active" : "" ?>">Calender</a>
+              </li>
+
               <li class="nav-item">
                 <a href="./?page=about" class="nav-link <?= isset($page) && $page =='about' ? "active" : "" ?>">About Us</a>
               </li>

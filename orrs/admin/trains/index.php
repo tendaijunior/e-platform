@@ -29,7 +29,7 @@
 					<tr class="bg-gradient-primary text-light">
 						<th>#</th>
 						<th>Date Created</th>
-						<th>Train #</th>
+						<th>Course #</th>
 						<th>Name</th>
 						<th>Capacity</th>
 						<th>Action</th>
@@ -38,7 +38,7 @@
 				<tbody>
 					<?php 
 						$i = 1;
-						$qry = $conn->query("SELECT * from `train_list` where delete_flag = 0 order by `name` asc ");
+						$qry = $conn->query("SELECT * from `course_list` where delete_flag = 0 order by `name` asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
@@ -47,8 +47,8 @@
 							<td class=""><?php echo $row['code'] ?></td>
 							<td class=""><p class="m-0 truncate-1"><?php echo $row['name'] ?></p></td>
 							<td class="px-0">
-								<div class="border-bottom"><span class="text-muted">First Class:</span> <b><?= number_format($row['first_class_capacity']) ?></b></div>
-								<span class="text-muted">Economy:</span> <b><?= number_format($row['economy_capacity']) ?></b>
+								<div class="border-bottom"><span class="text-muted">First Class:</span> <b><?= number_format($row['premium_class_capacity']) ?></b></div>
+								<span class="text-muted">Economy:</span> <b><?= number_format($row['standard_capacity']) ?></b>
 							</td>
 							<td align="center">
 								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
@@ -72,16 +72,16 @@
 <script>
 	$(document).ready(function(){
         $('#create_new').click(function(){
-			uni_modal("Add New Train","trains/manage_train.php")
+			uni_modal("Add New Course","trains/manage_train.php")
 		})
         $('.edit_data').click(function(){
-			uni_modal("Update Train Details","trains/manage_train.php?id="+$(this).attr('data-id'))
+			uni_modal("Update Course Details","trains/manage_train.php?id="+$(this).attr('data-id'))
 		})
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this Train permanently?","delete_train",[$(this).attr('data-id')])
+			_conf("Are you sure to delete this Course permanently?","delete_train",[$(this).attr('data-id')])
 		})
 		$('.view_data').click(function(){
-			uni_modal("Train Details","trains/view_train.php?id="+$(this).attr('data-id'))
+			uni_modal("Course Details","trains/view_train.php?id="+$(this).attr('data-id'))
 		})
 		$('.table td, .table th').addClass('py-1 px-2 align-middle')
 		$('.table').dataTable({
