@@ -6,7 +6,7 @@
             <span class="info-box-icon bg-gradient-warning elevation-1"><i class="fas fa-course"></i></span>
 
             <div class="info-box-content">
-            <span class="info-box-text">Total Trains</span>
+            <span class="info-box-text">Total Courses</span>
             <span class="info-box-number text-right">
                 <?php 
                     echo $conn->query("SELECT * FROM `course_list` where delete_flag = 0 ")->num_rows;
@@ -54,7 +54,7 @@
             <span class="info-box-icon bg-gradient-teal elevation-1"><i class="fas fa-ticket-alt"></i></span>
 
             <div class="info-box-content">
-            <span class="info-box-text">Reserved Passengers</span>
+            <span class="info-box-text">Reserved Students</span>
             <span class="info-box-number text-right">
                 <?php 
                     echo $conn->query("SELECT * FROM `reservation_list` where  unix_timestamp(schedule) >= '".(time())."' ")->num_rows;

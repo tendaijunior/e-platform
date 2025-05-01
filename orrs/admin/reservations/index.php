@@ -16,11 +16,11 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th>Seat #</th>
-						<th>Schedule</th>
+						<th>Seat Number</th>
+						<th>Date</th>
 						<th>Schedule Code</th>
-						<th>Passenger</th>
-						<th>Group</th>
+						<th>Student</th>
+						<th>Class</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -39,10 +39,10 @@
 								<?php 
 									switch ($row['seat_type']){
 										case 1:
-											echo '<span class="rounded-pill badge badge-warning col-6">First Class</span>';
+											echo '<span class="rounded-pill badge badge-warning col-6">Premium</span>';
 											break;
 										case 2:
-											echo '<span class="rounded-pill badge badge-success col-6">Economy</span>';
+											echo '<span class="rounded-pill badge badge-success col-6">Standard</span>';
 											break;
 									}
 								?>

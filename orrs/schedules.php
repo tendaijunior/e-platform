@@ -69,7 +69,7 @@
 							<td class="px-0">
 								<div class="px-2 py-1 border-bottom d-flex justify-content-between align-items-center">
 									<div class="d-flex align-items-center text-muted">
-										<span>Premium Class</span>
+										<span>Premium Class: </span>
 										<span class="fa fa-user mx-1"></span>
 										<b><?= isset($train_fcf_arr[$row['course_id']]) ? $train_fcf_arr[$row['course_id']] : 0 ?></b>
 									</div>
@@ -80,7 +80,7 @@
 								</div>
 								<div class="px-2 py-1 d-flex justify-content-between align-items-center">
 									<div class="d-flex align-items-center text-muted">
-										<span>Standard Class</span>
+										<span>Standard Class: </span>
 										<span class="fa fa-user mx-1"></span>
 										<b><?= isset($train_ef_arr[$row['course_id']]) ? $train_ef_arr[$row['course_id']] : 0 ?></b>
 									</div>
@@ -122,26 +122,4 @@
             ],
         });
 	})
-	function delete_train($id){
-		start_loader();
-		$.ajax({
-			url:_base_url_+"classes/Master.php?f=delete_train",
-			method:"POST",
-			data:{id: $id},
-			dataType:"json",
-			error:err=>{
-				console.log(err)
-				alert_toast("An error occured.",'error');
-				end_loader();
-			},
-			success:function(resp){
-				if(typeof resp== 'object' && resp.status == 'success'){
-					location.reload();
-				}else{
-					alert_toast("An error occured.",'error');
-					end_loader();
-				}
-			}
-		})
-	}
 </script>
