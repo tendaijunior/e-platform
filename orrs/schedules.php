@@ -56,11 +56,11 @@
 							<td class="px-0 text-center">
 								<?php if($row['type'] == 1): ?>
 
-									<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['date_schedule'])) ?></div>
+									<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['schedule_date'])) ?></div>
 								
 								<?php else: ?>
-									<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['date_schedule'])) ?></div>
-									<!-- <div class="px-1 border-bottom"><?php echo date("y-m-d",strtotime($row['date_schedule'])) ?></div> -->
+									<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['schedule_date'])) ?></div>
+									<!-- <div class="px-1 border-bottom"><?php echo date("y-m-d",strtotime($row['schedule_date'])) ?></div> -->
 								<?php endif; ?>
 								<div class="px-1"><span class="text-muted fa fa-clock"></span> <?= date("h:i A",strtotime($row['time_schedule'])) ?></div>
 							</td>

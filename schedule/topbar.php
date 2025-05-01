@@ -16,7 +16,7 @@
   		
   		</div>
       <div class="col-md-4 float-left text-white">
-        <large><b>School Faculty Scheduling System</b></large>
+        <large><b>Online Course Booking System</b></large>
       </div>
 	  	<div class="float-right">
         <div class=" dropdown mr-4">

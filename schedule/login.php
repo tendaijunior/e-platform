@@ -10,7 +10,7 @@ ob_end_flush();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>School Faculty Scheduling System</title>
+  <title>Online Course Booking System</title>
  	
 
 <?php include('./header.php'); ?>

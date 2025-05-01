@@ -33,7 +33,7 @@ if(isset($_GET['sid'])){
                             <dt class="text-muted">Schedule Code:</dt>
                             <dd class="pl-3"><b><?= isset($code) ? $code : 'N/A' ?></b></dd>
                             <dt class="text-muted">Schedule:</dt>
-                            <dd class="pl-3"><b><?= isset($date_schedule) && !is_null($date_schedule) ? date("M d, Y", strtotime($date_schedule)) : "Everday" ?> <?= isset($time_schedule) ? date("h:i A", strtotime($time_schedule)) : "--:-- --" ?></b></dd>
+                            <dd class="pl-3"><b><?= isset($schedule_date) && !is_null($schedule_date) ? date("M d, Y", strtotime($schedule_date)) : "Everday" ?> <?= isset($time_schedule) ? date("h:i A", strtotime($time_schedule)) : "--:-- --" ?></b></dd>
                         </dl>
                     </div>
                     <div class="col-md-4 col-sm-6">
@@ -58,7 +58,7 @@ if(isset($_GET['sid'])){
             <form action="" id="reserve-form">
                 <input type="hidden" name="schedule_id" value=<?= isset($id) ? $id : "" ?>>
                 <input type="hidden" name="time" value=<?= isset($time_schedule) ? $time_schedule : "" ?>>
-                <div class="form-group col-md-4 col-sm-6 <?= isset($date_schedule) && !is_null($date_schedule) ? 'd-none' : '' ?>">
+                <div class="form-group col-md-4 col-sm-6 <?= isset($schedule_date) && !is_null($schedule_date) ? 'd-none' : '' ?>">
                     <label for="date" class="form-group">Schedule Date</label>
                     <input class="form-control form-control-sm rounded-0" type="date" name="date" id="date" required value="<?= isset($date_schedule) && !is_null($date_schedule) ? $date_schedule : '' ?>" min="<?= date("Y-m-d") ?>">
                 </div>

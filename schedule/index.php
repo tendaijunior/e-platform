@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>School Faculty Scheduling System</title>
+  <title>Online Course Booking System</title>
  	
 
 <?php
@@ -232,7 +232,7 @@ window._conf = function($msg='',$func='',$params = []){
 		 			if(resp.length > 0){
 		 					Object.keys(resp).map(k=>{
 		 						var obj = {};
-		 							obj['title']=resp[k].title
+		 							obj['title']=resp[k].schedule_date
 		 							obj['data_id']=resp[k].id
 		 							obj['data_location']=resp[k].location
 		 							obj['data_description']=resp[k].description

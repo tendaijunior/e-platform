@@ -364,9 +364,10 @@ Class Action {
 		}
 	}
 	function get_schecdule(){
+		
 		extract($_POST);
 		$data = array();
-		$qry = $this->db->query("SELECT * FROM schedules where faculty_id = 0 or faculty_id = $faculty_id");
+		$qry = $this->db->query("SELECT * FROM schedule_list");
 		while($row=$qry->fetch_assoc()){
 			if($row['is_repeating'] == 1){
 				$rdata = json_decode($row['repeating_data']);
