@@ -18,18 +18,6 @@
 					</div>
 					<div class="card-body">
 						<div class="row">
-							<label for="" class="control-label col-md-2 offset-md-2">View Schedule of:</label>
-							<div class=" col-md-4">
-							<select name="faculty_id" id="faculty_id" class="custom-select select2">
-								<option value=""></option>
-							<?php 
-								$faculty = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM faculty order by concat(lastname,', ',firstname,' ',middlename) asc");
-								while($row= $faculty->fetch_array()):
-							?>
-								<option value="<?php echo $row['id'] ?>"><?php echo ucwords($row['name']) ?></option>
-							<?php endwhile; ?>
-							</select>
-							</div>
 						</div>
 						<hr>
 						<div id="calendar"></div>
@@ -86,120 +74,76 @@ a.fc-timegrid-event.fc-v-event.fc-event.fc-event-start.fc-event-end.fc-event-pas
 }
 </style>
 <script>
-	
-	$('#new_schedule').click(function(){
-		uni_modal('New Schedule','manage_schedule.php','mid-large')
-	})
-	$('.view_alumni').click(function(){
-		uni_modal("Bio","view_alumni.php?id="+$(this).attr('data-id'),'mid-large')
-		
-	})
-	$('.delete_alumni').click(function(){
-		_conf("Are you sure to delete this alumni?","delete_alumni",[$(this).attr('data-id')])
-	})
-	
-	function delete_alumni($id){
-		start_load()
-		$.ajax({
-			url:'ajax.php?action=delete_alumni',
-			method:'POST',
-			data:{id:$id},
-			success:function(resp){
-				if(resp==1){
-					alert_toast("Data successfully deleted",'success')
-					setTimeout(function(){
-						location.reload()
-					},1500)
-
-				}
-			}
-		})
-	}
-	 var calendarEl = document.getElementById('calendar');
-    var calendar;
 	document.addEventListener('DOMContentLoaded', function() {
-   
+		var calendarEl = document.getElementById('calendar');
+		var calendar;
 
-        calendar = new FullCalendar.Calendar(calendarEl, {
-          headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-          },
-          initialDate: '<?php echo date('Y-m-d') ?>',
-          weekNumbers: true,
-          navLinks: true, // can click day/week names to navigate views
-          editable: false,
-          selectable: true,
-          nowIndicator: true,
-          dayMaxEvents: true, // allow "more" link when too many events
-          // showNonCurrentDates: false,
-          events: []
-        });
-        calendar.render();
-     
+		// Call AJAX directly on page load using predefined faculty_id
+		start_load();
+		$.ajax({
+			url: 'ajax.php?action=get_schecdule',
+			method: 'POST',
+			data: {
+				faculty_id: '<?php echo $_SESSION["login_id"] ?>' // Replace with actual session variable
+			},
+			success: function(resp) {
+				let events = [];
+				if (resp) {
+					resp = JSON.parse(resp);
+					if (resp.length > 0) {
+						Object.keys(resp).forEach(function(k) {
+							let obj = {
+								title: resp[k].course_name,
+								data_id: resp[k].id,
+								data_location: resp[k].location,
+								data_description: resp[k].description
+							};
+							if (resp[k].is_repeating == 1) {
+								obj.daysOfWeek = resp[k].dow;
+								obj.startRecur = resp[k].start;
+								obj.endRecur = resp[k].end;
+								obj.startTime = resp[k].time_from;
+								obj.endTime = resp[k].time_to;
+							} else {
+								obj.start = resp[k].schedule_date + 'T' + resp[k].time_from;
+								obj.end = resp[k].schedule_date + 'T' + resp[k].time_to;
+							}
+							events.push(obj);
+						});
+					}
+				}
 
-  });
-	$('#faculty_id').change(function(){
-		 calendar.destroy()
-		 start_load()
-		 $.ajax({
-		 	url:'ajax.php?action=get_schecdule',
-		 	method:'POST',
-		 	data:{faculty_id: $(this).val()},
-		 	success:function(resp){
-		 		if(resp){
-		 			resp = JSON.parse(resp)
-		 					var evt = [] ;
-		 			if(resp.length > 0){
-		 					Object.keys(resp).map(k=>{
-		 						var obj = {};
-		 							obj['title']=resp[k].title
-		 							obj['data_id']=resp[k].id
-		 							obj['data_location']=resp[k].location
-		 							obj['data_description']=resp[k].description
-		 							if(resp[k].is_repeating == 1){
-		 							obj['daysOfWeek']=resp[k].dow
-		 							obj['startRecur']=resp[k].start
-		 							obj['endRecur']=resp[k].end
-									obj['startTime']=resp[k].time_from
-		 							obj['endTime']=resp[k].time_to
-		 							}else{
+				// Render calendar
+				calendar = new FullCalendar.Calendar(calendarEl, {
+					headerToolbar: {
+						left: 'prev,next today',
+						center: 'title',
+						right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+					},
+					initialDate: '<?php echo date("Y-m-d") ?>',
+					weekNumbers: true,
+					navLinks: true,
+					editable: false,
+					selectable: true,
+					nowIndicator: true,
+					dayMaxEvents: true,
+					events: events,
+					eventClick: function(e) {
+						const data = e.event.extendedProps;
+						uni_modal('View Schedule Details', 'view_schedule.php?id=' + data.data_id, 'mid-large');
+					}
+				});
 
-		 							obj['start']=resp[k].schedule_date+'T'+resp[k].time_from;
-		 							obj['end']=resp[k].schedule_date+'T'+resp[k].time_to;
-		 							}
-		 							
-		 							evt.push(obj)
-		 					})
-							 console.log(evt)
+				calendar.render();
+			},
+			complete: function() {
+				end_load();
+			}
+		});
 
-		 		}
-		 				  calendar = new FullCalendar.Calendar(calendarEl, {
-				          headerToolbar: {
-				            left: 'prev,next today',
-				            center: 'title',
-				            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-				          },
-				          initialDate: '<?php echo date('Y-m-d') ?>',
-				          weekNumbers: true,
-				          navLinks: true,
-				          editable: false,
-				          selectable: true,
-				          nowIndicator: true,
-				          dayMaxEvents: true, 
-				          events: evt,
-				          eventClick: function(e,el) {
-							   var data =  e.event.extendedProps;
-								uni_modal('View Schedule Details','view_schedule.php?id='+data.data_id,'mid-large')
-
-							  }
-				        });
-		 	}
-		 	},complete:function(){
-		 		calendar.render()
-		 		end_load()
-		 	}
-		 })
-	})
+		// Create new schedule
+		$('#new_schedule').click(function() {
+			uni_modal('New Schedule', 'manage_schedule.php', 'mid-large');
+		});
+	});
 </script>
