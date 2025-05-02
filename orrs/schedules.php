@@ -28,7 +28,7 @@
 						<th>Date</th>
 						<th>Course & Tutor</th>
 						<th>Venue</th>
-						<th>Capacity</th>
+						<th>Class Capacity</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -38,8 +38,8 @@
 						$i = 1;
 						$courses = $conn->query("SELECT *,Concat(code,' - ',`name`) as course FROM `train_list` where id in (SELECT train_id FROM `schedule_list` where delete_flag = 0 {$swhere})");
                                 $res = $courses->fetch_all(MYSQLI_ASSOC);
-                                $train_fcf_arr = array_column($res,'premium_class_capacity','id');
-                                $train_ef_arr = array_column($res,'standard_capacity','id');
+                                $train_fcf_arr = array_column($res,'first_class_capacity','id');
+                                $train_ef_arr = array_column($res,'economy_capacity','id');
                                 $train_arr = array_column($res,'course','id');
                                 $qry = $conn->query("SELECT * from `schedule_list` where delete_flag = 0 {$swhere} order by unix_timestamp(`date_created`) asc ");
                                 while($row = $qry->fetch_assoc()):
@@ -69,7 +69,7 @@
 							<td class="px-0">
 								<div class="px-2 py-1 border-bottom d-flex justify-content-between align-items-center">
 									<div class="d-flex align-items-center text-muted">
-										<span>Premium Class: </span>
+										<span>Premium: </span>
 										<span class="fa fa-user mx-1"></span>
 										<b><?= isset($train_fcf_arr[$row['train_id']]) ? $train_fcf_arr[$row['train_id']] : 0 ?></b>
 									</div>
@@ -80,7 +80,7 @@
 								</div>
 								<div class="px-2 py-1 d-flex justify-content-between align-items-center">
 									<div class="d-flex align-items-center text-muted">
-										<span>Standard Class: </span>
+										<span>Standard: </span>
 										<span class="fa fa-user mx-1"></span>
 										<b><?= isset($train_ef_arr[$row['train_id']]) ? $train_ef_arr[$row['train_id']] : 0 ?></b>
 									</div>
