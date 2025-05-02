@@ -19,8 +19,8 @@
 			<table class="table table-bordered table-hover table-striped">
 				<colgroup>
 					<col width="5%">
-					<col width="20%">
-					<col width="15%">
+					<col width="10%">
+					<col width="25%">
 					<col width="20%">
 					<col width="25%">
 					<col width="15%">
@@ -29,7 +29,7 @@
 					<tr class="bg-gradient-primary text-light">
 						<th>#</th>
 						<th>Schedule</th>
-						<th>Course #</th>
+						<th>Course Name</th>
 						<th>Tutor Name</th>
 						<th>Class Capacity</th>
 						<th>Action</th>

@@ -36,7 +36,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 						<th>Code</th>
 						<th>Schedule</th>
 						<th>Tutor Name</th>
-						<th>Course Topic</th>
+						<th>Course Name</th>
 						<th>Class Capacity & Fare</th>
 						<th>Action</th>
 					</tr>
@@ -49,7 +49,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 						$train_fcf_arr = array_column($res,'first_class_capacity','id');
 						$train_ef_arr = array_column($res,'economy_capacity','id');
 						$train_arr = array_column($res,'train','id');
-						$qry = $conn->query("SELECT * from `schedule_list` where delete_flag = 0 and `type` = '{$type}' order by unix_timestamp(`date_created`) asc ");
+						$qry = $conn->query("SELECT * from `vcourseschedule` where delete_flag = 0 and `type` = '{$type}' order by unix_timestamp(`date_created`) asc ");
 						while($row = $qry->fetch_assoc()):
 							
 					?>
@@ -57,14 +57,14 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 							<td class="text-center px-1"><?= $row['code'] ?></td>
 							<td class="px-0">
 								<?php if($row['type'] == 1): ?>
-								<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar"></span> Everyday</div>
+									<div class="px-1 border-bottom"><?php echo date("Y-m-d",strtotime($row['date_schedule'])) ?></div>
 								<?php else: ?>
-								<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['date_schedule'])) ?></div>
+								<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar"></span> <?= date("M d, Y",strtotime($row['date_schedule'])) ?></div>
 								<?php endif; ?>
 								<div class="px-1"><span class="text-muted fa fa-clock"></span> <?= date("h:i A",strtotime($row['time_schedule'])) ?></div>
 							</td>
 							<td class="px-0">
-								<div class="px-1"><span class="text-muted"></span> <b><?= $row['route_from'] ?></b></div>
+								<div class="px-1"><span class="text-muted"></span> <b><?= $row['tutor_name'] ?></b></div>
 							</td>
 							<td class="px-1"><?php echo isset($train_arr[$row['train_id']]) ? $train_arr[$row['train_id']] : "N/A" ?></td>
 							<td class="px-0">
