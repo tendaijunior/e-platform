@@ -56,19 +56,10 @@ if(isset($_GET['id'])){
             </select>
         </div>
         <fielset>
-            <legend class="text-muted">Route</legend>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="route_from" class="control-label">From</label>
-                    <input type="text" name="route_from" id="route_from" class="form-control form-control-sm form-control-border" required value="<?= isset($route_from) ? $route_from : "" ?>"/>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="route_to" class="control-label">To</label>
-                    <input type="text" name="route_to" id="route_to" class="form-control form-control-sm form-control-border" required value="<?= isset($route_to) ? $route_to : "" ?>"/>
-                </div>
-            </div>
+            <legend class="text-muted">Course Venue:</legend>
+            
             <div class="form-group col-md-12">
-                    <label for="venue" class="control-label"> Venue & Virtual Meeting Links</label>
+                    <label for="venue" class="control-label"> Location & Virtual Classroom Links</label>
                     <input type="text" name="venue" id="venue" class="form-control form-control-sm form-control-border" required value="<?= isset($venue) ? $venue : "" ?>"/>
             </div>     
                     
@@ -76,14 +67,14 @@ if(isset($_GET['id'])){
 
         </fielset>
         <fielset>
-            <legend class="text-muted">Enroll Fee</legend>
+            <legend class="text-muted">Course Enrollment Fee</legend>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="first_class_fare" class="control-label">Premium Class</label>
+                    <label for="first_class_fare" class="control-label">Premium Class: (R)</label>
                     <input type="number" name="first_class_fare" id="first_class_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($first_class_fare) ? $first_class_fare : "" ?>"/>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="economy_fare" class="control-label">Standard Class</label>
+                    <label for="economy_fare" class="control-label">Standard Class: (R)</label>
                     <input type="number" name="economy_fare" id="economy_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($economy_fare) ? $economy_fare : "" ?>"/>
                 </div>
             </div>

@@ -36,8 +36,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 						<th>Code</th>
 						<th>Schedule</th>
 						<th>Tutor Name</th>
-						<th>Course</th>
-						<th>Fare/Capacity</th>
+						<th>Course Topic</th>
+						<th>Class Capacity & Fare</th>
 						<th>Action</th>
 					</tr>
 				</thead>
