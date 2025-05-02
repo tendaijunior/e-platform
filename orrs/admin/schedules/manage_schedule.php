@@ -45,7 +45,7 @@ if(isset($_GET['id'])){
             </div>
         </fielset>
         <div class="form-group">
-            <label for="train_id" class="control-label">Course</label>
+            <label for="train_id" class="control-label">Choose Course</label>
             <select name="train_id" id="train_id" class="form-control form-control-border select2" >
                 <?php 
                 $trains = $conn->query("SELECT * FROM train_list where delete_flag = 0 ".(isset($train_id) && !empty($train_id) ? " or id = '{$train_id}' " : "")." order by name asc");
@@ -67,6 +67,13 @@ if(isset($_GET['id'])){
                     <input type="text" name="route_to" id="route_to" class="form-control form-control-sm form-control-border" required value="<?= isset($route_to) ? $route_to : "" ?>"/>
                 </div>
             </div>
+            <div class="form-group col-md-12">
+                    <label for="venue" class="control-label"> Venue & Virtual Meeting Links</label>
+                    <input type="text" name="venue" id="venue" class="form-control form-control-sm form-control-border" required value="<?= isset($venue) ? $venue : "" ?>"/>
+            </div>     
+                    
+
+
         </fielset>
         <fielset>
             <legend class="text-muted">Enroll Fee</legend>
