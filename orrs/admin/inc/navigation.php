@@ -53,7 +53,7 @@
                       <a href="<?php echo base_url ?>admin/?page=trains" class="nav-link nav-trains">
                         <i class="nav-icon fas fa-train"></i>
                         <p>
-                          Train List
+                          Course List
                         </p>
                       </a>
                     </li>

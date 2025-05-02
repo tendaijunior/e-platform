@@ -24,19 +24,19 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 			</div>
 			<table class="table table-hover table-striped table-bordered">
 				<colgroup>
+					<col width="10%">
 					<col width="15%">
 					<col width="15%">
-					<col width="20%">
-					<col width="20%">
-					<col width="20%">
+					<col width="15%">
+					<col width="30%">
 					<col width="10%">
 				</colgroup>
 				<thead>
 					<tr>
 						<th>Code</th>
 						<th>Schedule</th>
-						<th>Route</th>
-						<th>Train</th>
+						<th>Tutor Name</th>
+						<th>Course</th>
 						<th>Fare/Capacity</th>
 						<th>Action</th>
 					</tr>
@@ -65,12 +65,11 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 							</td>
 							<td class="px-0">
 								<div class="px-1 border-bottom"><span class="text-muted">From:</span> <b><?= $row['route_from'] ?></b></div>
-								<div class="px-1"><span class="text-muted">To:</span> <b><?= $row['route_to'] ?></b></div>
 							</td>
 							<td class="px-1"><?php echo isset($train_arr[$row['train_id']]) ? $train_arr[$row['train_id']] : "N/A" ?></td>
 							<td class="px-0">
-								<div class="px-1 border-bottom"><span class="text-muted">First Class:</span> <span class="text-muted fa fa-user"></span> <b><?= isset($train_fcf_arr[$row['train_id']]) ? $train_fcf_arr[$row['train_id']] : 0 ?></b> <span class="text-muted ml-2 fa fa-tag"></span> <b><?= rtrim(number_format($row['first_class_fare'],2),'.') ?></b></div>
-								<div class="px-1"><span class="text-muted">Economy:</span> <span class="text-muted fa fa-user"></span> <b><?= isset($train_ef_arr[$row['train_id']]) ? $train_ef_arr[$row['train_id']] : 0 ?></b> <span class="text-muted ml-2 fa fa-tag"></span> <b><?= rtrim(number_format($row['economy_fare'],2),'.') ?></b></div>
+								<div class="px-1 border-bottom"><span class="text-muted">Premium:</span> <span class="text-muted fa fa-user"></span> <b><?= isset($train_fcf_arr[$row['train_id']]) ? $train_fcf_arr[$row['train_id']] : 0 ?></b> <span class="text-muted ml-2 fa fa-tag"></span> <b>R <?= rtrim(number_format($row['first_class_fare'],2),'.') ?></b></div>
+								<div class="px-1"><span class="text-muted">Standard:</span> <span class="text-muted fa fa-user"></span> <b><?= isset($train_ef_arr[$row['train_id']]) ? $train_ef_arr[$row['train_id']] : 0 ?></b> <span class="text-muted ml-2 fa fa-tag"></span> <b> R <?= rtrim(number_format($row['economy_fare'],2),'.') ?></b></div>
 							</td>
 							<td class="px-1" align="center">
 								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">

@@ -8,7 +8,7 @@
 </style>
 <div class="card card-outline card-primary rounded-0 shadow">
 	<div class="card-header">
-		<h3 class="card-title">List of Trains</h3>
+		<h3 class="card-title">List of Courses</h3>
 		<div class="card-tools">
 			<a href="javascript:void(0)" id="create_new" class="btn btn-flat btn-sm btn-primary"><span class="fas fa-plus"></span>  Add New</a>
 		</div>
@@ -28,10 +28,10 @@
 				<thead>
 					<tr class="bg-gradient-primary text-light">
 						<th>#</th>
-						<th>Date Created</th>
-						<th>Train #</th>
-						<th>Name</th>
-						<th>Capacity</th>
+						<th>Schedule</th>
+						<th>Course #</th>
+						<th>Tutor Name</th>
+						<th>Class Capacity</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -47,8 +47,8 @@
 							<td class=""><?php echo $row['code'] ?></td>
 							<td class=""><p class="m-0 truncate-1"><?php echo $row['name'] ?></p></td>
 							<td class="px-0">
-								<div class="border-bottom"><span class="text-muted">First Class:</span> <b><?= number_format($row['first_class_capacity']) ?></b></div>
-								<span class="text-muted">Economy:</span> <b><?= number_format($row['economy_capacity']) ?></b>
+								<div class="border-bottom"><span class="text-muted">Premium:</span> <b><?= number_format($row['first_class_capacity']) ?></b></div>
+								<span class="text-muted">Standard:</span> <b><?= number_format($row['economy_capacity']) ?></b>
 							</td>
 							<td align="center">
 								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
