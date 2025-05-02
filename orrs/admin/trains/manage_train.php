@@ -15,20 +15,20 @@ if(isset($_GET['id'])){
     <form action="" id="train-form">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
         <div class="form-group">
-            <label for="code" class="control-label">Train #</label>
+            <label for="code" class="control-label">Course #</label>
             <input type="text" pattern="[a-zA-z0-9_-]+" name="code" id="code" class="form-control form-control-border" placeholder="Enter Unique Code" value ="<?php echo isset($code) ? $code : '' ?>" required>
             <small class='muted'><em>Spaces and special characters except (-_) are not allowed in this field.</em></small>
         </div>
         <div class="form-group">
             <label for="name" class="control-label">Name</label>
-            <input type="text" name="name" id="name" class="form-control form-control-border" placeholder="Enter train Name" value ="<?php echo isset($name) ? $name : '' ?>" required>
+            <input type="text" name="name" id="name" class="form-control form-control-border" placeholder="Enter Course Name" value ="<?php echo isset($name) ? $name : '' ?>" required>
         </div>
         <div class="form-group">
-            <label for="first_class_capacity" class="control-label">First Class Seat Capacity</label>
+            <label for="first_class_capacity" class="control-label">Premium Seat Capacity</label>
             <input type="number" name="first_class_capacity" id="first_class_capacity" class="form-control form-control-border text-right" value ="<?php echo isset($first_class_capacity) ? $first_class_capacity : 0 ?>" required>
         </div>
         <div class="form-group">
-            <label for="economy_capacity" class="control-label">Economy Seat Capacity</label>
+            <label for="economy_capacity" class="control-label">Standard Seat Capacity</label>
             <input type="number" name="economy_capacity" id="economy_capacity" class="form-control form-control-border text-right" value ="<?php echo isset($economy_capacity) ? $economy_capacity : 0 ?>" required>
         </div>
     </form>

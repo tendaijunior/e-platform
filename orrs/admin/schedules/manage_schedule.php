@@ -45,7 +45,7 @@ if(isset($_GET['id'])){
             </div>
         </fielset>
         <div class="form-group">
-            <label for="train_id" class="control-label">Train</label>
+            <label for="train_id" class="control-label">Course</label>
             <select name="train_id" id="train_id" class="form-control form-control-border select2" >
                 <?php 
                 $trains = $conn->query("SELECT * FROM train_list where delete_flag = 0 ".(isset($train_id) && !empty($train_id) ? " or id = '{$train_id}' " : "")." order by name asc");
@@ -69,14 +69,14 @@ if(isset($_GET['id'])){
             </div>
         </fielset>
         <fielset>
-            <legend class="text-muted">Fare</legend>
+            <legend class="text-muted">Enroll Fee</legend>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="first_class_fare" class="control-label">First Class</label>
+                    <label for="first_class_fare" class="control-label">Premium Class</label>
                     <input type="number" name="first_class_fare" id="first_class_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($first_class_fare) ? $first_class_fare : "" ?>"/>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="economy_fare" class="control-label">Economy</label>
+                    <label for="economy_fare" class="control-label">Standard Class</label>
                     <input type="number" name="economy_fare" id="economy_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($economy_fare) ? $economy_fare : "" ?>"/>
                 </div>
             </div>

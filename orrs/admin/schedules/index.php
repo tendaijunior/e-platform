@@ -27,8 +27,8 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 					<col width="10%">
 					<col width="15%">
 					<col width="15%">
-					<col width="15%">
-					<col width="30%">
+					<col width="20%">
+					<col width="20%">
 					<col width="10%">
 				</colgroup>
 				<thead>
@@ -64,7 +64,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 								<div class="px-1"><span class="text-muted fa fa-clock"></span> <?= date("h:i A",strtotime($row['time_schedule'])) ?></div>
 							</td>
 							<td class="px-0">
-								<div class="px-1 border-bottom"><span class="text-muted">From:</span> <b><?= $row['route_from'] ?></b></div>
+								<div class="px-1"><span class="text-muted"></span> <b><?= $row['route_from'] ?></b></div>
 							</td>
 							<td class="px-1"><?php echo isset($train_arr[$row['train_id']]) ? $train_arr[$row['train_id']] : "N/A" ?></td>
 							<td class="px-0">
