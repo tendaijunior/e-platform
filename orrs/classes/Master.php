@@ -89,16 +89,16 @@ Class Master extends DBConnection {
 		$check = $this->conn->query("SELECT * FROM `train_list` where `code` = '{$code}' and delete_flag = 0 ".($id > 0 ? " and id != '{$id}'" : ""));
 		if($check->num_rows > 0){
 			$resp['status'] = 'failed';
-			$resp['msg'] = "Train # already exists.";
+			$resp['msg'] = "Course # already exists.";
 		}else{
 			$save = $this->conn->query($sql);
 			if($save){
 				$rid = !empty($id) ? $id : $this->conn->insert_id;
 				$resp['status'] = 'success';
 				if(empty($id))
-					$resp['msg'] = "Train has successfully added.";
+					$resp['msg'] = "Course has successfully added.";
 				else
-					$resp['msg'] = "Train details has been updated successfully.";
+					$resp['msg'] = "Course details has been updated successfully.";
 			}else{
 				$resp['status'] = 'failed';
 				$resp['msg'] = "An error occured.";
@@ -114,7 +114,7 @@ Class Master extends DBConnection {
 		$del = $this->conn->query("UPDATE `train_list` set delete_flag = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success',"Train has been deleted successfully.");
+			$this->settings->set_flashdata('success',"Course has been deleted successfully.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;

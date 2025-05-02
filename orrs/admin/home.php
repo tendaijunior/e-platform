@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-12 col-sm-12 col-md-6 col-lg-3">
         <div class="info-box bg-gradient-light shadow">
-            <span class="info-box-icon bg-gradient-warning elevation-1"><i class="fas fa-train"></i></span>
+            <span class="info-box-icon bg-gradient-warning elevation-1"><i class="fas fa-book"></i></span>
 
             <div class="info-box-content">
             <span class="info-box-text">Total Courses</span>

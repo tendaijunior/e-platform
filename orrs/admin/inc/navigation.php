@@ -51,7 +51,7 @@
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=trains" class="nav-link nav-trains">
-                        <i class="nav-icon fas fa-train"></i>
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
                           Course List
                         </p>
