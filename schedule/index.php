@@ -232,7 +232,7 @@ window._conf = function($msg='',$func='',$params = []){
 		 			if(resp.length > 0){
 		 					Object.keys(resp).map(k=>{
 		 						var obj = {};
-		 							obj['title']=resp[k].course_name
+		 							obj['title']='yey'
 		 							obj['data_id']=resp[k].id
 		 							obj['data_location']=resp[k].location
 		 							obj['data_description']=resp[k].description
