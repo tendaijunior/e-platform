@@ -188,7 +188,7 @@ Class Master extends DBConnection {
 			}
 			$_POST['code'] = $prefix.$code;
 		}
-		$_POST['date_schedule'] = empty($_POST['date_schedule']) ? NULL : $_POST['date_schedule'];
+		$_POST['schedule_date'] = empty($_POST['schedule_date']) ? NULL : $_POST['schedule_date'];
 		extract($_POST);
 		$data = "";
 		foreach($_POST as $k =>$v){

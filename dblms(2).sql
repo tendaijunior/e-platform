@@ -1293,6 +1293,7 @@ INSERT INTO `schedules` (`id`, `faculty_id`, `title`, `schedule_type`, `descript
 
 CREATE TABLE `schedule_list` (
   `id` int(30) NOT NULL,
+  `train_id` int(30) NOT NULL,
   `code` varchar(100) NOT NULL,
   `course_id` int(30) NOT NULL,
   `region_location` varchar(255) NOT NULL,

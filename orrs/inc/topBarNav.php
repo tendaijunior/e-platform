@@ -66,7 +66,10 @@
                 <a href="./" class="nav-link <?= isset($page) && $page =='home' ? "active" : "" ?>">Home</a>
               </li>
               <li class="nav-item">
-                <a href="./?page=schedules" class="nav-link <?= isset($page) && $page =='schedules' ? "active" : "" ?>">Schedules</a>
+                <a href="./?page=schedules" class="nav-link <?= isset($page) && $page =='schedules' ? "active" : "" ?>">Training Schedule</a>
+              </li>
+              <li class="nav-item">
+                <a href="./?page=calender" class="nav-link <?= isset($page) && $page =='schedules' ? "active" : "" ?>">Training Calender</a>
               </li>
               <li class="nav-item">
                 <a href="./?page=about" class="nav-link <?= isset($page) && $page =='about' ? "active" : "" ?>">About Us</a>

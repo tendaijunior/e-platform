@@ -35,8 +35,8 @@ if(isset($_GET['id'])){
             <legend class="text-muted">Schedule</legend>
             <div class="row">
                 <div class="form-group col-md-6 <?= (isset($type) && $type == 1) || !isset($type) ? 'd-none' : '' ?>" id="date-holder">
-                    <label for="date_schedule" class="control-label">Date</label>
-                    <input type="date" name="date_schedule" id="date_schedule" class="form-control form-control-sm form-control-border" value="<?= isset($date_schedule) ? date("Y-m-d", strtotime($date_schedule)) : "" ?>" <?= (isset($type) && $type == 2) ? 'required' : '' ?>/>
+                    <label for="schedule_date" class="control-label">Date</label>
+                    <input type="date" name="schedule_date" id="schedule_date" class="form-control form-control-sm form-control-border" value="<?= isset($date_schedule) ? date("Y-m-d", strtotime($date_schedule)) : "" ?>" <?= (isset($type) && $type == 2) ? 'required' : '' ?>/>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="time_schedule" class="control-label">Time</label>
@@ -56,11 +56,11 @@ if(isset($_GET['id'])){
             </select>
         </div>
         <fielset>
-            <legend class="text-muted">Course Venue:</legend>
+            <legend class="text-muted">Course region_location:</legend>
             
             <div class="form-group col-md-12">
-                    <label for="venue" class="control-label"> Location & Virtual Classroom Links</label>
-                    <input type="text" name="venue" id="venue" class="form-control form-control-sm form-control-border" required value="<?= isset($venue) ? $venue : "" ?>"/>
+                    <label for="region_location" class="control-label"> Location & Virtual Classroom Links</label>
+                    <input type="text" name="region_location" id="region_location" class="form-control form-control-sm form-control-border" required value="<?= isset($region_location) ? $region_location : "" ?>"/>
             </div>     
                     
 
@@ -70,12 +70,12 @@ if(isset($_GET['id'])){
             <legend class="text-muted">Course Enrollment Fee</legend>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="first_class_fare" class="control-label">Premium Class: (R)</label>
-                    <input type="number" name="first_class_fare" id="first_class_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($first_class_fare) ? $first_class_fare : "" ?>"/>
+                    <label for="premium_class_fare" class="control-label">Premium Class: (R)</label>
+                    <input type="number" name="premium_class_fare" id="premium_class_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($premium_class_fare) ? $premium_class_fare : "" ?>"/>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="economy_fare" class="control-label">Standard Class: (R)</label>
-                    <input type="number" name="economy_fare" id="economy_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($economy_fare) ? $economy_fare : "" ?>"/>
+                    <label for="standard_class_fare" class="control-label">Standard Class: (R)</label>
+                    <input type="number" name="standard_class_fare" id="standard_class_fare" class="form-control form-control-sm form-control-border text-right" required value="<?= isset($standard_class_fare) ? $standard_class_fare : "" ?>"/>
                 </div>
             </div>
         </fielset>
@@ -87,7 +87,7 @@ if(isset($_GET['id'])){
             if($(this).val() == 1){
                 if($('#date-holder').hasClass('d-none') == false){}
                 $('#date-holder').addClass('d-none')
-                $('#date_schedule').val("")
+                $('#schedule_date').val("")
             }else{
                 $('#date-holder').removeClass('d-none')
             }

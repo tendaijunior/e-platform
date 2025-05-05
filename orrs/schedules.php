@@ -41,7 +41,7 @@
                                 $train_fcf_arr = array_column($res,'first_class_capacity','id');
                                 $train_ef_arr = array_column($res,'economy_capacity','id');
                                 $train_arr = array_column($res,'course','id');
-                                $qry = $conn->query("SELECT * from `schedule_list` where delete_flag = 0 {$swhere} order by unix_timestamp(`date_created`) asc ");
+                                $qry = $conn->query("SELECT * from `vcourseschedule` where region_location is not null");
                                 while($row = $qry->fetch_assoc()):
                                     $fc_capacity = isset($train_fcf_arr[$row['train_id']]) ? $train_fcf_arr[$row['train_id']] : 0;
                                     $e_capacity = isset($train_ef_arr[$row['train_id']]) ? $train_ef_arr[$row['train_id']] : 0;
@@ -56,16 +56,16 @@
 							<td class="px-0 text-center">
 								<?php if($row['type'] == 1): ?>
 
-									<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['date_schedule'])) ?></div>
+									<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['schedule_date'])) ?></div>
 								
 								<?php else: ?>
-									<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['date_schedule'])) ?></div>
-									<!-- <div class="px-1 border-bottom"><?php echo date("y-m-d",strtotime($row['date_schedule'])) ?></div> -->
+									<div class="px-1 border-bottom"><span class="text-muted fa fa-calendar-day"></span> <?= date("M d, Y",strtotime($row['schedule_date'])) ?></div>
+									<!-- <div class="px-1 border-bottom"><?php echo date("y-m-d",strtotime($row['schedule_date'])) ?></div> -->
 								<?php endif; ?>
 								<div class="px-1"><span class="text-muted fa fa-clock"></span> <?= date("h:i A",strtotime($row['time_schedule'])) ?></div>
 							</td>
 							<td class="px-0"><?php echo isset($train_arr[$row['train_id']]) ? $train_arr[$row['train_id']] : "N/A" ?></td>
-							<td class="PX-0"><b><?php echo $row['venue'] ?></b></td>
+							<td class="PX-0"><b><?php echo $row['region_location'] ?></b></td>
 							<td class="px-0">
 								<div class="px-2 py-1 border-bottom d-flex justify-content-between align-items-center">
 									<div class="d-flex align-items-center text-muted">
@@ -75,7 +75,7 @@
 									</div>
 									<div class="text-end text-muted">
 										<span class="fa fa-tag me-1"></span>
-										<b>R<?= rtrim(number_format($row['first_class_fare'], 2), '.') ?></b>
+										<b>R<?= rtrim(number_format($row['premium_class_fare'], 2), '.') ?></b>
 									</div>
 								</div>
 								<div class="px-2 py-1 d-flex justify-content-between align-items-center">
@@ -86,7 +86,7 @@
 									</div>
 									<div class="text-end text-muted">
 										<span class="fa fa-tag me-1"></span>
-										<b>R<?= rtrim(number_format($row['economy_fare'], 2), '.') ?></b>
+										<b>R<?= rtrim(number_format($row['standard_class_fare'], 2), '.') ?></b>
 									</div>
 								</div>
 							</td>
