@@ -18,7 +18,7 @@ Class Action {
 	function login(){
 		
 			extract($_POST);		
-			$qry = $this->db->query("SELECT * FROM users where username = '".$username."' and password = '".md5($password)."' ");
+			$qry = $this->db->query("SELECT * FROM calender_users where username = '".$username."' and password = '".md5($password)."' ");
 			if($qry->num_rows > 0){
 				foreach ($qry->fetch_array() as $key => $value) {
 					if($key != 'password' && !is_numeric($key))
@@ -55,7 +55,7 @@ Class Action {
 			extract($_POST);
 			if(isset($email))
 				$username = $email;
-		$qry = $this->db->query("SELECT * FROM users where username = '".$username."' and password = '".md5($password)."' ");
+		$qry = $this->db->query("SELECT * FROM calender_users where username = '".$username."' and password = '".md5($password)."' ");
 		if($qry->num_rows > 0){
 			foreach ($qry->fetch_array() as $key => $value) {
 				if($key != 'passwors' && !is_numeric($key))
@@ -107,7 +107,7 @@ Class Action {
 		if($type == 1)
 			$establishment_id = 0;
 		$data .= ", establishment_id = '$establishment_id' ";
-		$chk = $this->db->query("Select * from users where username = '$username' and id !='$id' ")->num_rows;
+		$chk = $this->db->query("SELECT * FROM calender_users where username = '$username' and id !='$id' ")->num_rows;
 		if($chk > 0){
 			return 2;
 			exit;
@@ -132,7 +132,7 @@ Class Action {
 		$data = " name = '".$firstname.' '.$lastname."' ";
 		$data .= ", username = '$email' ";
 		$data .= ", password = '".md5($password)."' ";
-		$chk = $this->db->query("SELECT * FROM users where username = '$email' ")->num_rows;
+		$chk = $this->db->query("SELECT * FROM calender_users where username = '$email' ")->num_rows;
 		if($chk > 0){
 			return 2;
 			exit;
@@ -171,7 +171,7 @@ Class Action {
 		$data .= ", username = '$email' ";
 		if(!empty($password))
 		$data .= ", password = '".md5($password)."' ";
-		$chk = $this->db->query("SELECT * FROM users where username = '$email' and id != '{$_SESSION['login_id']}' ")->num_rows;
+		$chk = $this->db->query("SELECT * FROM calender_users where username = '$email' and id != '{$_SESSION['login_id']}' ")->num_rows;
 		if($chk > 0){
 			return 2;
 			exit;
@@ -367,7 +367,7 @@ Class Action {
 		
 		extract($_POST);
 		$data = array();
-		$qry = $this->db->query("SELECT * FROM schedule_list");
+		$qry = $this->db->query("SELECT * FROM vcourseschedule");
 		while($row=$qry->fetch_assoc()){
 			if($row['is_repeating'] == 1){
 				$rdata = json_decode($row['repeating_data']);

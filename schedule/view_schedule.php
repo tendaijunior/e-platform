@@ -10,8 +10,10 @@ if(isset($_GET['id'])){
 ?>
 <div class="container-fluid">
 	<p>Course: <b><?php echo ucwords($course_name) ?></b></p>
-	<p>Description: <b><?php echo $description ?></b></p>
-	<p>Location: </i> <b><?php echo $venue ?></b></p>
+	<p>Tutor: <b><?php echo ucwords($tutor_name) ?></b></p>
+	<p>Description: <br/> <?php echo $description ?></p>
+	<p>Location: <br/></i> <b><?php echo $venue ?></b></p>
+	<p>Date: <b><?php echo date('F j, Y', strtotime($schedule_date)); ?></b></p>
 	<p>Time Start: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$schedule_date)) ?></b></p>
 	<p>Time End: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$schedule_date)) ?></b></p>
 	<hr class="divider">
