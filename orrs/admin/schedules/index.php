@@ -27,15 +27,14 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 					<col width="10%">
 					<col width="10%">
 					<col width="15%">
-					<col width="20%">
-					<col width="20%">
+					<col width="25%">
+					<col width="30%">
 					<col width="10%">
 				</colgroup>
 				<thead>
 					<tr>
 						<th>Code</th>
 						<th>Schedule</th>
-						<th>Tutor Name</th>
 						<th>Course Name and Tutor</th>
 						<th>Location</th>
 						<th>Class Capacity & Fare</th>
@@ -68,6 +67,7 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 								<div class="px-1"><span class="text-muted"></span> <b><?= $row['tutor_name'] ?></b></div>
 							</td>
 							<td class="px-1"><?php echo isset($train_arr[$row['train_id']]) ? $train_arr[$row['train_id']] : "N/A" ?></td>
+							<td class="text-center px-1"><?= $row['region_location'] ?></td>
 							<td class="px-0">
 								<div class="px-1 border-bottom"><span class="text-muted">Premium:</span> <span class="text-muted fa fa-user"></span> <b><?= isset($train_fcf_arr[$row['train_id']]) ? $train_fcf_arr[$row['train_id']] : 0 ?></b> <span class="text-muted ml-2 fa fa-tag"></span> <b>R <?= rtrim(number_format($row['premium_class_fare'],2),'.') ?></b></div>
 								<div class="px-1"><span class="text-muted">Standard:</span> <span class="text-muted fa fa-user"></span> <b><?= isset($train_ef_arr[$row['train_id']]) ? $train_ef_arr[$row['train_id']] : 0 ?></b> <span class="text-muted ml-2 fa fa-tag"></span> <b> R <?= rtrim(number_format($row['standard_class_fare'],2),'.') ?></b></div>

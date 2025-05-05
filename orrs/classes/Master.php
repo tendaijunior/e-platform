@@ -247,7 +247,7 @@ Class Master extends DBConnection {
 	function save_reservation(){
 		$_POST['schedule'] = $_POST['date'] ." ".$_POST['time'];
 		extract($_POST);
-		$capacity = $this->conn->query("SELECT `".($seat_type == 1 ? "first_class_capacity" : "economy_capacity")."` FROM train_list where id in (SELECT train_id FROM `schedule_list` where id ='{$schedule_id}') ")->fetch_array()[0];
+		$capacity = $this->conn->query("SELECT `".($seat_type == 1 ? "first_class_capacity" : "economy_class_capacity")."` FROM train_list where id in (SELECT train_id FROM `schedule_list` where id ='{$schedule_id}') ")->fetch_array()[0];
 		$reserve = $this->conn->query("SELECT * FROM `reservation_list` where schedule_id = '{$schedule_id}' and schedule='{$schedule}' and seat_type='$seat_type'")->num_rows;
 		$slot = $capacity - $reserve;
 		if(count($firstname) > $slot){

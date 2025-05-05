@@ -1,3 +1,4 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <?php
 if(isset($_GET['sid'])){
     $trains = $conn->query("SELECT *,Concat(code,' - ',`name`) as train FROM `train_list` where id in (SELECT train_id FROM `schedule_list` where delete_flag = 0 and id='{$_GET['sid']}')");
@@ -23,7 +24,7 @@ if(isset($_GET['sid'])){
 <div class="content py-5">
     <div class="card rounded-0 card-outline card-primary shadow">
         <div class="card-header rounded-0">
-            <h5 class="card-title">Reservation Form</h5>
+            <h5 class="card-title">Course Booking Reservation Form</h5>
         </div>
         <div class="card-body rounded-0">
             <div class="callout border-primary rounded-0">
@@ -46,10 +47,10 @@ if(isset($_GET['sid'])){
                     </div>
                     <div class="col-md-4 col-sm-6">
                         <dl>
-                            <dt class="text-muted">First Class Fare:</dt>
+                            <dt class="text-muted">Premium Class Fare:</dt>
                             <dd class="pl-3"><b><?= isset($first_class_fare) ? $first_class_fare : '--.--' ?></b></dd>
-                            <dt class="text-muted">Economy Fare:</dt>
-                            <dd class="pl-3"><b><?= isset($economy_fare) ? $economy_fare : "--.--" ?></b></dd>
+                            <dt class="text-muted">Standard Class Fare:</dt>
+                            <dd class="pl-3"><b><?= isset($standard_class_fare) ? $standard_class_fare : "--.--" ?></b></dd>
                         </dl>
                     </div>
                 </div>
@@ -67,8 +68,8 @@ if(isset($_GET['sid'])){
                         <div class="form-group">
                             <select class="form-control form-control-sm form-control-border" name="seat_type" required>
                                 <option value="" disabled selected>Select here</option>
-                                <option value="1">First Class</option>
-                                <option value="2">Economy</option>
+                                <option value="1">Premium Class</option>
+                                <option value="2">Standard</option>
                             </select>
                             <small class="text-muted mx-2">Seat Type</small>
                         </div>
@@ -76,7 +77,7 @@ if(isset($_GET['sid'])){
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group">
                             <input type="text" class="form-control form-control-sm form-control-border text-right" name="fare_amount" readonly>
-                            <small class="text-muted mx-2">Fare Amount</small>
+                            <small class="text-muted mx-2">Course Amount</small>
                         </div>
                     </div>
                 </div> 
@@ -139,9 +140,9 @@ if(isset($_GET['sid'])){
        $('[name="seat_type"]').change(function(){
             var type = $(this).val()
             if(type == 1){
-                $('[name="fare_amount"]').val('<?= $first_class_fare ?>')
+                $('[name="fare_amount"]').val('<?= $premium_class_fare ?>')
             }else{
-                $('[name="fare_amount"]').val('<?= $economy_fare ?>')
+                $('[name="fare_amount"]').val('<?= $standard_class_fare ?>')
             }
        })
        $('.btn-remove').click(function(){
