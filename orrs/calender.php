@@ -63,8 +63,8 @@
     <div class="toast-body text-white">
     </div>
   </div>
-  <main id="" style="margin-top: 3.5rem;"  class="bg-dark">
-    <div class="container pt-4 pb-4">
+  <main id="">
+    <div class="container">
       <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
@@ -229,7 +229,7 @@ window._conf = function($msg='',$func='',$params = []){
 		 			if(resp.length > 0){
 		 					Object.keys(resp).map(k=>{
 		 						var obj = {};
-		 							obj['title']='hi'
+		 							obj['title']=resp[k].train_name
 		 							obj['data_id']=resp[k].id
 		 							obj['data_location']=resp[k].location
 		 							obj['data_description']=resp[k].description

@@ -19,9 +19,9 @@ $train_group = ['','First Class','Economy'];
 <div class="content py-5">
     <div class="card rounded-0 card-outline card-primary shadow">
         <div class="card-header rounded-0">
-            <h5 class="card-title">Online Course Meeting Tickets</h5>
+            <h5 class="card-title">Generated Tickets</h5>
             <div class="card-tools">
-                <button class="btn btn-sm btn-flat btn-success" id="print"><i class="fa fa-print"></i> Print / Download</button>
+                <button class="btn btn-sm btn-flat btn-success" id="print"><i class="fa fa-print"></i> Print</button>
             </div>
         </div>
         <div class="card-body rounded-0">
@@ -58,7 +58,7 @@ $train_group = ['','First Class','Economy'];
                     <div class="row">
                         <div class="col-auto pr-2"><b>Schedule Code:</b></div>
                         <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= $row['sched_code'] ?></b></div>
-                        <div class="col-auto pl-4 pr-2"><b>Course:</b></div>
+                        <div class="col-auto pl-4 pr-2"><b>Train:</b></div>
                         <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= isset($train_arr[$row['train_id']]) ? $train_arr[$row['train_id']] : "N/A" ?></b></div>
                     </div>
                     <div class="row">
@@ -70,7 +70,7 @@ $train_group = ['','First Class','Economy'];
                         <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= $train_group[$row['seat_type']] ?></b></div>
                     </div>
                     <div class="row">
-                        <div class="col-auto pr-2"><b>Student Name:</b></div>
+                        <div class="col-auto pr-2"><b>Passenger Name:</b></div>
                         <div class="col-auto flex-grow-1 border-bottom border-dark"><b><?= strtoupper($row['lastname'].', '.$row['firstname'].' '.$row['middlename']) ?></b></div>
                     </div>
                     <div class="clear-fix my-5"></div>

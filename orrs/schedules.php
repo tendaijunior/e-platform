@@ -41,7 +41,7 @@
                                 $train_fcf_arr = array_column($res,'first_class_capacity','id');
                                 $train_ef_arr = array_column($res,'economy_capacity','id');
                                 $train_arr = array_column($res,'course','id');
-                                $qry = $conn->query("SELECT * from `vcourseschedule` where region_location is not null");
+                                $qry = $conn->query("SELECT * from `vcourseschedule` where train_id is not null");
                                 while($row = $qry->fetch_assoc()):
                                     $fc_capacity = isset($train_fcf_arr[$row['train_id']]) ? $train_fcf_arr[$row['train_id']] : 0;
                                     $e_capacity = isset($train_ef_arr[$row['train_id']]) ? $train_ef_arr[$row['train_id']] : 0;

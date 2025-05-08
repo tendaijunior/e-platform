@@ -16,18 +16,3 @@
 <script src="<?php echo base_url().'assets/frontend/default/js/custom.js'; ?>"></script>
 
 <!-- SHOW TOASTR NOTIFIVATION -->
-<?php if ($this->session->flashdata('flash_message') != ""):?>
-
-<script type="text/javascript">
-	toastr.success('<?php echo $this->session->flashdata("flash_message");?>');
-</script>
-
-<?php endif;?>
-
-<?php if ($this->session->flashdata('error_message') != ""):?>
-
-<script type="text/javascript">
-	toastr.error('<?php echo $this->session->flashdata("error_message");?>');
-</script>
-
-<?php endif;?>
